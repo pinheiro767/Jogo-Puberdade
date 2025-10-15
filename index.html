@@ -80,8 +80,6 @@
 
     <audio id="background-music" loop muted volume="0.3">
         <source src="audio/bgm.mp3" type="audio/mpeg">
-    <audio id="background-music" loop muted volume="0.3">
-        <source src="audio/bgm.mp3" type="audio/mpeg">
     </audio>
     <audio id="sfx-click" muted>
         <source src="audio/dice_roll.ogg" type="audio/ogg">
@@ -162,7 +160,7 @@
             {
                 text: "Ter 'sonhos molhados' ou acordar com a roupa úmida é normal?",
                 options: [
-                    { text: "Sim! São 'poluções noturnas', o corpo libera excesso de sêmen.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
+                    { text: "Sim! São 'poluições noturnas', o corpo libera excesso de sêmen.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
                     { text: "Não, isso é muito estranho e deve ser um problema hormonal.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
                 ]
             },
@@ -196,6 +194,8 @@
             const sound = sounds[soundName];
             if (sound) {
                 sound.currentTime = 0;
+                // Adicionado .load() para forçar o navegador a ler o arquivo antes de tocar
+                sound.load(); 
                 sound.play().catch(e => console.log('Audio play failed:', e));
             }
         }
@@ -219,6 +219,7 @@
         
         function playMusic() {
             if (isMuted) return;
+            bgMusic.load(); 
             bgMusic.play().catch(e => console.log("Autoplay music failed:", e));
         }
         // --- FIM DAS FUNÇÕES DE ÁUDIO ---
@@ -231,23 +232,18 @@
         // --- LÓGICA DE CENÁRIO E PROGRESSO ---
         
         function updateScenario() {
-            // A transição de fundo é tratada no CSS (adicionada no styles.css)
             
             if (gameState.medals >= 6) {
-                // Estágio 3: Máxima Autoconfiança
                 mainContent.className = 'main-content scenario-3'; 
                 showMessage("✨ Seu conhecimento atingiu a clareza máxima! Desbloqueou Cenário 3!", false);
             } else if (gameState.medals >= 3) {
-                // Estágio 2: Foco no Estudo
                 mainContent.className = 'main-content scenario-2';
             } else {
-                // Estágio 1: Início
                 mainContent.className = 'main-content scenario-1'; 
             }
         }
 
         function updateStats() {
-            // Atualiza apenas os elementos visíveis
             document.getElementById('knowledge').textContent = Math.round(gameState.knowledge) + ' pts';
             document.getElementById('medals').textContent = gameState.medals; 
             
