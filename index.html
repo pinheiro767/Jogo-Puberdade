@@ -127,6 +127,7 @@
 
         // Cenários educativos sobre puberdade masculina (Dúvidas)
         const scenarios = [
+            // PERGUNTAS INICIAIS
             {
                 text: "Meus pelos estão crescendo em lugares novos. Isso é normal?",
                 options: [
@@ -153,6 +154,35 @@
                 options: [
                     { text: "Me comparo constantemente e fico ansioso e inseguro.", effects: { confidence: -20, health: -5 }, sfx: 'fail' },
                     { text: "Entendo que cada pessoa tem seu próprio ritmo de desenvolvimento.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' }
+                ]
+            },
+            // NOVAS PERGUNTAS ADICIONADAS
+            {
+                text: "Ter 'sonhos molhados' ou acordar com a roupa úmida é normal?",
+                options: [
+                    { text: "Sim! São 'poluições noturnas', o corpo libera excesso de sêmen.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
+                    { text: "Não, isso é muito estranho e deve ser um problema hormonal.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "O orgasmo dura sempre o mesmo tempo para todas as pessoas?",
+                options: [
+                    { text: "Não! A duração e a intensidade são diferentes para cada pessoa e momento.", effects: { confidence: +10, knowledge: +20 }, sfx: 'success' },
+                    { text: "Sim, há um tempo médio, se for diferente, algo pode estar errado.", effects: { confidence: -5, knowledge: -5 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "Ter uma ereção 'do nada' (sem pensar nisso) é normal?",
+                options: [
+                    { text: "Sim! É comum na puberdade, causado por reflexos nervosos ou hormônios. É um sinal de corpo saudável.", effects: { confidence: +25, knowledge: +25 }, sfx: 'success' },
+                    { text: "Não, é constrangedor e significa que estou tendo pensamentos inadequados.", effects: { confidence: -20, knowledge: -10 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "O que eu sinto não é importante. Devo guardar tudo para mim?",
+                options: [
+                    { text: "Não! Compartilhar sentimentos com alguém de confiança é fundamental para a saúde mental.", effects: { confidence: +30, health: +15 }, sfx: 'success' },
+                    { text: "Sim, é melhor ser forte e não incomodar os outros com meus problemas.", effects: { confidence: -20, health: -15 }, sfx: 'fail' }
                 ]
             },
         ];
@@ -199,7 +229,7 @@
         // --- LÓGICA DE CENÁRIO E PROGRESSO ---
         
         function updateScenario() {
-            // A transição de fundo é tratada no CSS (adicionada no styles.css abaixo)
+            // A transição de fundo é tratada no CSS (adicionada no styles.css)
             
             if (gameState.medals >= 6) {
                 // Estágio 3: Máxima Autoconfiança
