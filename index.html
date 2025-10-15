@@ -93,13 +93,16 @@
     <audio id="sfx-win" muted>
         <source src="audio/win.wav" type="audio/wav">
     </audio>
+    <audio id="sfx-job-start" muted>
+        <source src="audio/move.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         // --- VARIÁVEIS DE ESTADO E DADOS ---
         let gameState = {
-            health: 70,       
-            knowledge: 50,    
-            confidence: 60,   
+            health: 70,     
+            knowledge: 50,  
+            confidence: 60, 
             hygiene: 65,
             medals: 0, 
             activeJobs: new Map()
@@ -111,6 +114,7 @@
         const sfxSuccess = document.getElementById('sfx-success');
         const sfxFail = document.getElementById('sfx-fail');
         const sfxWin = document.getElementById('sfx-win');
+        const sfxJobStart = document.getElementById('sfx-job-start'); // NOVO: Referência para move.mp3
         const muteButton = document.getElementById('mute-button');
         let isMuted = true;
 
@@ -121,7 +125,7 @@
         // Mapeamento das imagens
         const imageMap = {
             NEUTRAL: '1000006911.png', 
-            HAPPY: '1000006910.png',   
+            HAPPY: '1000006910.png',    
             SAD: '1000006909.png'      
         };
 
@@ -190,7 +194,14 @@
         // --- FUNÇÕES DE ÁUDIO ---
         function playSound(soundName) {
             if (isMuted) return;
-            const sounds = { 'click': sfxClick, 'success': sfxSuccess, 'fail': sfxFail, 'win': sfxWin };
+            // Mapeamento de sons atualizado
+            const sounds = { 
+                'click': sfxClick, 
+                'success': sfxSuccess, 
+                'fail': sfxFail, 
+                'win': sfxWin,
+                'job-start': sfxJobStart // NOVO SOM: Para iniciar a tarefa
+            };
             const sound = sounds[soundName];
             if (sound) {
                 sound.currentTime = 0;
@@ -206,7 +217,8 @@
             sfxClick.muted = isMuted;
             sfxSuccess.muted = isMuted;
             sfxFail.muted = isMuted;
-            sfxWin.muted = isMuted; 
+            sfxWin.muted = isMuted;
+            sfxJobStart.muted = isMuted; // NOVO: Controle de mudo para move.mp3
             muteButton.textContent = isMuted ? '🔇' : '🔊';
 
             if (!isMuted) {
@@ -264,13 +276,13 @@
         function triggerRandomScenario() {
             if (document.getElementById('question-modal').style.display === 'flex') {
                 showMessage("Já temos uma dúvida ativa! Responda primeiro.", true);
-                playSound('fail');
+                playSound('fail'); // Usa error.mp3 para indicar que não pode clicar
                 return;
             }
             
             const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
             showQuestionModal(scenario);
-            playSound('win'); 
+            playSound('win'); // Usa win.wav para o momento de entrar no modal
             
             boyCharacter.classList.remove('boy-happy', 'boy-sad');
             boyCharacter.classList.add('boy-sad'); 
@@ -301,7 +313,7 @@
             applyEffects(option.effects);
             document.getElementById('question-modal').style.display = 'none';
             
-            playSound(option.sfx);
+            playSound(option.sfx); // Usa 'success' (coin.wav) ou 'fail' (error.mp3)
             
             const isCorrect = option.sfx === 'success';
 
@@ -330,7 +342,7 @@
             }, 3000);
         }
 
-        // --- LÓGICA DE GERENCIAMENTO (MANTIDA) ---
+        // --- LÓGICA DE GERENCIAMENTO (ATUALIZADA) ---
 
         function applyEffects(effects) {
             Object.keys(effects).forEach(stat => {
@@ -350,13 +362,21 @@
         }
 
         function doJob(jobType, reward, duration, emoji) {
-            if (gameState.activeJobs.has(jobType)) return;
-            gameState.activeJobs.set(jobType, true);
+            if (gameState.activeJobs.has(jobType)) {
+                // TAREFA JÁ ATIVA: Usa o som de erro (error.mp3)
+                showMessage("Aguarde, a pesquisa atual está em andamento!", true);
+                playSound('fail'); 
+                return;
+            }
             
+            gameState.activeJobs.set(jobType, true);
+            showMessage(`Iniciando ${emoji} Pesquisar/Ler sobre Puberdade...`);
+            playSound('job-start'); // NOVO: Toca move.mp3
+
             setTimeout(() => {
                 applyEffects({ knowledge: reward, confidence: 15 });
                 showMessage(`Atividade concluída! Ganho de ${reward} Conhecimento. 🧠`);
-                playSound('success');
+                playSound('success'); // Toca coin.wav para a recompensa do job
                 gameState.activeJobs.delete(jobType);
                 updateStats();
             }, duration);
@@ -402,7 +422,7 @@
             if (isMuted === false) { 
                 playMusic(); 
             }
-            setupCharacterInteraction();
+            // Não precisamos de setupCharacterInteraction, pois o evento está no onclick do HTML
         }
     </script>
 </body>
