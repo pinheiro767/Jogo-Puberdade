@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada da Puberdade Masculina: O Herói do Conhecimento</title>
+    
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+    <div class="game-container">
+        <div class="sidebar">
+            
+            <div class="stats">
+                <h3>🏆 Conquistas do Herói</h3>
+                <div class="stat-item">
+                    <span>🧠 Conhecimento (Pts):</span>
+                    <span id="knowledge">50</span>
+                </div>
+                <div class="stat-item">
+                    <span>🏅 Medalhas Acumuladas:</span>
+                    <span id="medals">0</span>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <h3>📚 Ganhar Conhecimento</h3>
+                <div class="job-option" onclick="doJob('readPubertyBook', 50, 6000, '🧠')">
+                    <div class="job-icon">📖</div>
+                    <div class="job-info">
+                        <div class="job-name">Pesquisar/Ler sobre Puberdade</div>
+                        <div class="job-reward">+50 Conhecimento, +15 Autoestima (6s)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn" onclick="resetRoom()">🔄 Recomeçar Jornada</button>
+            </div>
+        </div>
+
+        <div class="main-content" id="main-content">
+            <div class="floating-particles">
+                <div class="particle">✨</div>
+                <div class="particle">🌟</div>
+                <div class="particle">💫</div>
+                <div class="particle">⭐</div>
+                <div class="particle">🔮</div>
+                <div class="particle">💎</div>
+                <div class="particle">🌈</div>
+                <div class="particle">🎯</div>
+            </div>
+            
+            <div id="character-container">
+                <img id="boy-character" src="images/1000006911.png" alt="Garoto Pronta para Aprender" onclick="triggerRandomScenario()"> 
+                <div id="thought-bubble">Clique no garoto para aprender!</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="message" id="message"></div>
+
+    <div id="question-modal">
+        <div id="modal-content">
+            <h3 id="modal-scenario-text"></h3>
+            <div id="modal-options-container"></div>
+        </div>
+    </div>
+
+    <button id="mute-button" onclick="toggleMute()">🔇</button>
+
+    <audio id="background-music" loop muted volume="0.3">
+        <source src="audio/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sfx-click" muted>
+        <source src="audio/dice_roll.ogg" type="audio/ogg">
+    </audio>
+    <audio id="sfx-success" muted>
+        <source src="audio/coin.wav" type="audio/wav">
+    </audio>
+    <audio id="sfx-fail" muted>
+        <source src="audio/error.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sfx-win" muted>
+        <source src="audio/win.wav" type="audio/wav">
+    </audio>
+
+    <script>
+        // --- VARIÁVEIS DE ESTADO E DADOS ---
+        let gameState = {
+            health: 70,       
+            knowledge: 50,    
+            confidence: 60,   
+            hygiene: 65,
+            medals: 0, 
+            activeJobs: new Map()
+        };
+        
+        // Referências de Áudio e DOM
+        const bgMusic = document.getElementById('background-music');
+        const sfxClick = document.getElementById('sfx-click');
+        const sfxSuccess = document.getElementById('sfx-success');
+        const sfxFail = document.getElementById('sfx-fail');
+        const sfxWin = document.getElementById('sfx-win');
+        const muteButton = document.getElementById('mute-button');
+        let isMuted = true;
+
+        const boyCharacter = document.getElementById('boy-character');
+        const thoughtBubble = document.getElementById('thought-bubble');
+        const mainContent = document.getElementById('main-content');
+
+        // Mapeamento das imagens (Seus arquivos)
+        const imageMap = {
+            NEUTRAL: '1000006911.png', 
+            HAPPY: '1000006910.png',   
+            SAD: '1000006909.png'      
+        };
+
+        // Cenários educativos sobre puberdade masculina (Dúvidas)
+        const scenarios = [
+            {
+                text: "Meus pelos estão crescendo em lugares novos. Isso é normal?",
+                options: [
+                    { text: "Fico preocupado e tento removê-los sem saber como.", effects: { confidence: -10, knowledge: -5 }, sfx: 'fail' },
+                    { text: "Entendo que é normal - hormônios causam crescimento de pelos.", effects: { confidence: +15, knowledge: +20 }, sfx: 'success' }
+                ]
+            },
+            {
+                text: "Tenho curiosidade sobre masturbação. É normal na adolescência?",
+                options: [
+                    { text: "Sinto vergonha e acho que é errado ou doentio.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' },
+                    { text: "Entendo que é normal e saudável - faz parte do autoconhecimento.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' }
+                ]
+            },
+            {
+                text: "Minha voz está falhando e às vezes fica rouca. Isso é normal?",
+                options: [
+                    { text: "Fico envergonhado e evito falar alto na escola.", effects: { confidence: -15, knowledge: -5 }, sfx: 'fail' },
+                    { text: "Entendo que a laringe está crescendo e é temporário. Aceito a fase.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' }
+                ]
+            },
+             {
+                text: "Meus amigos já estão mais desenvolvidos que eu. Devo me preocupar?",
+                options: [
+                    { text: "Me comparo constantemente e fico ansioso e inseguro.", effects: { confidence: -20, health: -5 }, sfx: 'fail' },
+                    { text: "Entendo que cada pessoa tem seu próprio ritmo de desenvolvimento.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' }
+                ]
+            },
+        ];
+        
+        // --- FUNÇÕES DE ÁUDIO (MANTIDAS) ---
+        function playSound(soundName) {
+            if (isMuted) return;
+            const sounds = { 'click': sfxClick, 'success': sfxSuccess, 'fail': sfxFail, 'win': sfxWin };
+            const sound = sounds[soundName];
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(e => console.log('Audio play failed:', e));
+            }
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            bgMusic.muted = isMuted;
+            sfxClick.muted = isMuted;
+            sfxSuccess.muted = isMuted;
+            sfxFail.muted = isMuted;
+            sfxWin.muted = isMuted; 
+            muteButton.textContent = isMuted ? '🔇' : '🔊';
+
+            if (!isMuted) {
+                playMusic();
+            } else {
+                bgMusic.pause();
+                bgMusic.currentTime = 0;
+            }
+        }
+        
+        function playMusic() {
+            if (isMuted) return;
+            bgMusic.play().catch(e => console.log("Autoplay music failed:", e));
+        }
+        // --- FIM DAS FUNÇÕES DE ÁUDIO ---
+        
+        // Função para trocar a imagem do avatar
+        function setCharacterImage(imageName) {
+            boyCharacter.src = `images/${imageName}`; 
+        }
+
+        // --- LÓGICA DE CENÁRIO E PROGRESSO ---
+        
+        function updateScenario() {
+            // A transição de fundo é tratada no CSS (adicionada no styles.css abaixo)
+            
+            if (gameState.medals >= 6) {
+                // Estágio 3: Máxima Autoconfiança (Usando classe CSS)
+                mainContent.className = 'main-content scenario-3'; 
+                showMessage("✨ Seu conhecimento atingiu a clareza máxima! Desbloqueou Cenário 3!", false);
+            } else if (gameState.medals >= 3) {
+                // Estágio 2: Foco no Estudo
+                mainContent.className = 'main-content scenario-2';
+            } else {
+                // Estágio 1: Início
+                mainContent.className = 'main-content scenario-1'; 
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('knowledge').textContent = Math.round(gameState.knowledge) + ' pts';
+            document.getElementById('medals').textContent = gameState.medals; 
+            
+            updateScenario();
+        }
+
+        function giveRewardItem() {
+            gameState.medals += 1; 
+            applyEffects({ knowledge: 30, confidence: 15 }); 
+            
+            showMessage('🎉 PRÊMIO! Você ganhou uma Medalha! Seu conhecimento está crescendo.', false);
+            playSound('win');
+            updateStats();
+        }
+
+
+        // --- LÓGICA DE PERGUNTAS E INTERAÇÃO ---
+        function triggerRandomScenario() {
+            if (document.getElementById('question-modal').style.display === 'flex') {
+                showMessage("Já temos uma dúvida ativa! Responda primeiro.", true);
+                playSound('fail');
+                return;
+            }
+            
+            const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+            showQuestionModal(scenario);
+            playSound('win'); 
+            
+            boyCharacter.classList.remove('boy-happy', 'boy-sad');
+            boyCharacter.classList.add('boy-sad'); 
+            
+            thoughtBubble.textContent = "Uau, preciso responder isso!";
+        }
+
+        function showQuestionModal(scenario) {
+            const modal = document.getElementById('question-modal');
+            const text = document.getElementById('modal-scenario-text');
+            const container = document.getElementById('modal-options-container');
+            
+            text.textContent = scenario.text;
+            container.innerHTML = '';
+            
+            scenario.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'modal-option';
+                button.textContent = option.text;
+                button.onclick = () => selectOption(option, scenario);
+                container.appendChild(button);
+            });
+            
+            modal.style.display = 'flex';
+        }
+        
+        function selectOption(option, scenario) {
+            applyEffects(option.effects);
+            document.getElementById('question-modal').style.display = 'none';
+            
+            playSound(option.sfx);
+            
+            const isCorrect = option.sfx === 'success';
+
+            // TEMPO DE EXIBIÇÃO AUMENTADO PARA 6 SEGUNDOS
+            const feedbackText = isCorrect ? '✅ Resposta Correta!' : '❌ BOMBA! Resposta Incorreta.';
+            showMessage(feedbackText, !isCorrect); 
+            
+            // Reação do personagem
+            boyCharacter.classList.remove('boy-happy', 'boy-sad'); 
+            
+            if (isCorrect) {
+                setCharacterImage(imageMap.HAPPY);
+                boyCharacter.classList.add('boy-happy');
+                thoughtBubble.textContent = "Acertei! Me sinto um super-herói do conhecimento!";
+                giveRewardItem(); 
+            } else {
+                setCharacterImage(imageMap.SAD);
+                boyCharacter.classList.add('boy-sad');
+                thoughtBubble.textContent = "Que pena, essa dúvida me deixou confuso. Preciso estudar mais.";
+            }
+            
+            // Retorna ao estado neutro após 3 segundos
+            setTimeout(() => {
+                boyCharacter.classList.remove('boy-happy', 'boy-sad');
+                setCharacterImage(imageMap.NEUTRAL); 
+                thoughtBubble.textContent = "Clique no garoto para aprender!";
+            }, 3000);
+        }
+
+        // --- LÓGICA DE GERENCIAMENTO (MANTIDA) ---
+
+        function applyEffects(effects) {
+            Object.keys(effects).forEach(stat => {
+                if (gameState.hasOwnProperty(stat)) {
+                    if (stat !== 'knowledge') {
+                        gameState[stat] = Math.max(0, Math.min(100, gameState[stat] + effects[stat]));
+                    } else {
+                        gameState[stat] = Math.max(0, gameState[stat] + effects[stat]);
+                    }
+                }
+            });
+            if (gameState.health <= 0 || gameState.confidence <= 0) {
+                 showMessage('Fim de jogo! Você não conseguiu gerenciar bem seu desenvolvimento.', true);
+                 playSound('fail');
+                 setTimeout(() => resetRoom(), 3000);
+            }
+        }
+
+        function doJob(jobType, reward, duration, emoji) {
+            if (gameState.activeJobs.has(jobType)) return;
+            gameState.activeJobs.set(jobType, true);
+            
+            setTimeout(() => {
+                applyEffects({ knowledge: reward, confidence: 15 });
+                showMessage(`Atividade concluída! Ganho de ${reward} Conhecimento. 🧠`);
+                playSound('success');
+                gameState.activeJobs.delete(jobType);
+                updateStats();
+            }, duration);
+        }
+
+        function resetRoom() {
+            window.location.reload(); 
+        }
+
+        function showMessage(text, isError = false) {
+            const message = document.getElementById('message');
+            message.textContent = text;
+            message.className = 'message' + (isError ? ' error' : '');
+            message.classList.add('show');
+            
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 6000); // TEMPO DE LEITURA AUMENTADO
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeGame();
+        });
+
+        function initializeGame() {
+            updateStats();
+            muteButton.textContent = isMuted ? '🔇' : '🔊';
+            playMusic();
+            // A interação agora está no onclick do elemento img
+        }
+    </script>
+</body>
+</html>
