@@ -9,6 +9,14 @@
 
 </head>
 <body>
+    
+    <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10001; transition: opacity 0.5s ease;">
+        <h1 style="font-size: 2.5em; margin-bottom: 30px; text-align: center;">Jornada do Herói do Conhecimento</h1>
+        <p style="margin-bottom: 30px; opacity: 0.9;">O áudio será ativado com o seu clique.</p>
+        <button id="start-button" style="padding: 15px 30px; font-size: 1.2em; background: #4CAF50; border: none; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            🎵 Iniciar Jogo e Ligar Som
+        </button>
+    </div>
     <div class="game-container">
         <div class="sidebar">
             
@@ -110,7 +118,7 @@
         const thoughtBubble = document.getElementById('thought-bubble');
         const mainContent = document.getElementById('main-content');
 
-        // Mapeamento das imagens (Seus arquivos)
+        // Mapeamento das imagens
         const imageMap = {
             NEUTRAL: '1000006911.png', 
             HAPPY: '1000006910.png',   
@@ -149,7 +157,7 @@
             },
         ];
         
-        // --- FUNÇÕES DE ÁUDIO (MANTIDAS) ---
+        // --- FUNÇÕES DE ÁUDIO ---
         function playSound(soundName) {
             if (isMuted) return;
             const sounds = { 'click': sfxClick, 'success': sfxSuccess, 'fail': sfxFail, 'win': sfxWin };
@@ -194,7 +202,7 @@
             // A transição de fundo é tratada no CSS (adicionada no styles.css abaixo)
             
             if (gameState.medals >= 6) {
-                // Estágio 3: Máxima Autoconfiança (Usando classe CSS)
+                // Estágio 3: Máxima Autoconfiança
                 mainContent.className = 'main-content scenario-3'; 
                 showMessage("✨ Seu conhecimento atingiu a clareza máxima! Desbloqueou Cenário 3!", false);
             } else if (gameState.medals >= 3) {
@@ -207,6 +215,7 @@
         }
 
         function updateStats() {
+            // Atualiza apenas os elementos visíveis
             document.getElementById('knowledge').textContent = Math.round(gameState.knowledge) + ' pts';
             document.getElementById('medals').textContent = gameState.medals; 
             
@@ -268,8 +277,7 @@
             
             const isCorrect = option.sfx === 'success';
 
-            // TEMPO DE EXIBIÇÃO AUMENTADO PARA 6 SEGUNDOS
-            const feedbackText = isCorrect ? '✅ Resposta Correta!' : '❌ BOMBA! Resposta Incorreta.';
+            const feedbackText = `${isCorrect ? '✅ Resposta Correta!' : '❌ BOMBA! Resposta Incorreta.'}`;
             showMessage(feedbackText, !isCorrect); 
             
             // Reação do personagem
@@ -338,19 +346,35 @@
             
             setTimeout(() => {
                 message.classList.remove('show');
-            }, 6000); // TEMPO DE LEITURA AUMENTADO
+            }, 6000);
         }
 
-        // Inicializar
+        // --- FUNÇÃO DE INICIALIZAÇÃO CORRIGIDA ---
         document.addEventListener('DOMContentLoaded', () => {
-            initializeGame();
+            const startButton = document.getElementById('start-button');
+            
+            // ANTES DE TUDO, CONFIGURA O BOTÃO PARA INICIAR O JOGO E O ÁUDIO
+            startButton.addEventListener('click', () => {
+                const splashScreen = document.getElementById('splash-screen');
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                    initializeGame(); // INICIA O JOGO APÓS O CLIQUE
+                }, 500);
+            });
+            
+            // O código abaixo é apenas para configurar o mute button no início, não inicia o jogo
+            muteButton.textContent = isMuted ? '🔇' : '🔊';
         });
 
         function initializeGame() {
+            // ESTA FUNÇÃO SÓ RODA DEPOIS QUE O USUÁRIO CLICOU
             updateStats();
-            muteButton.textContent = isMuted ? '🔇' : '🔊';
-            playMusic();
-            // A interação agora está no onclick do elemento img
+            // Tenta ligar a música se não estiver no mudo
+            if (isMuted === false) { 
+                playMusic(); 
+            }
+            setupCharacterInteraction();
         }
     </script>
 </body>
