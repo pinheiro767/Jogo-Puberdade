@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jornada da Puberdade Masculina: O Herói do Conhecimento</title>
-    
     <link rel="stylesheet" href="css/styles.css">
-
 </head>
 <body>
     
@@ -17,9 +15,9 @@
             🎵 Iniciar Jogo e Ligar Som
         </button>
     </div>
+
     <div class="game-container">
         <div class="sidebar">
-            
             <div class="stats">
                 <h3>🏆 Conquistas do Herói</h3>
                 <div class="stat-item">
@@ -39,6 +37,13 @@
                     <div class="job-info">
                         <div class="job-name">Pesquisar/Ler sobre Puberdade</div>
                         <div class="job-reward">+50 Conhecimento, +15 Autoestima (6s)</div>
+                    </div>
+                </div>
+                <div class="job-option" onclick="watchVideo('Léo_A_Voz_da_Adolescência_em_Transição.mp4', 40)">
+                    <div class="job-icon">🎬</div>
+                    <div class="job-info">
+                        <div class="job-name">Ver Vídeo: A Voz da Transição</div>
+                        <div class="job-reward">+40 Conhecimento (Imediato)</div>
                     </div>
                 </div>
             </div>
@@ -61,13 +66,21 @@
             </div>
             
             <div id="character-container">
-                <img id="boy-character" src="images/1000006911.png" alt="Garoto Pronta para Aprender" onclick="triggerRandomScenario()"> 
+                <img id="boy-character" src="images/1000006911.png" alt="Garoto pronto para aprender" onclick="triggerRandomScenario()"> 
                 <div id="thought-bubble">Clique no garoto para aprender!</div>
             </div>
         </div>
     </div>
     
     <div class="message" id="message"></div>
+    <div id="success-animation-container">
+        <img id="sparkle-gif" src="images/sparkle.gif" alt="Animação de Sucesso" style="width: 100px; height: 100px; display: none; position: absolute; z-index: 100;">
+    </div>
+
+    <video id="puberty-video" style="display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); z-index: 200; border: 5px solid #2a5298;" controls width="640" height="360">
+        <source src="video/Léo_A_Voz_da_Adolescência_em_Transição.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+    </video>
 
     <div id="question-modal">
         <div id="modal-content">
@@ -93,41 +106,44 @@
     <audio id="sfx-win" muted>
         <source src="audio/win.wav" type="audio/wav">
     </audio>
+    <audio id="sfx-job-start" muted>
+        <source src="audio/move.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // --- VARIÁVEIS DE ESTADO E DADOS ---
         let gameState = {
-            health: 70,       
-            knowledge: 50,    
-            confidence: 60,   
+            health: 70,
+            knowledge: 50,
+            confidence: 60,
             hygiene: 65,
-            medals: 0, 
+            medals: 0,
             activeJobs: new Map()
         };
         
-        // Referências de Áudio e DOM
         const bgMusic = document.getElementById('background-music');
         const sfxClick = document.getElementById('sfx-click');
         const sfxSuccess = document.getElementById('sfx-success');
         const sfxFail = document.getElementById('sfx-fail');
         const sfxWin = document.getElementById('sfx-win');
+        const sfxJobStart = document.getElementById('sfx-job-start');
         const muteButton = document.getElementById('mute-button');
         let isMuted = true;
+
+        bgMusic.volume = 0.3;
 
         const boyCharacter = document.getElementById('boy-character');
         const thoughtBubble = document.getElementById('thought-bubble');
         const mainContent = document.getElementById('main-content');
+        const sparkleGif = document.getElementById('sparkle-gif');
+        const pubertyVideo = document.getElementById('puberty-video');
 
-        // Mapeamento das imagens
         const imageMap = {
-            NEUTRAL: '1000006911.png', 
-            HAPPY: '1000006910.png',   
-            SAD: '1000006909.png'      
+            NEUTRAL: '1000006911.png',
+            HAPPY: '1000006910.png',
+            SAD: '1000006909.png'
         };
 
-        // Cenários educativos sobre puberdade masculina (Dúvidas)
         const scenarios = [
-            // PERGUNTAS INICIAIS
             {
                 text: "Meus pelos estão crescendo em lugares novos. Isso é normal?",
                 options: [
@@ -149,14 +165,13 @@
                     { text: "Entendo que a laringe está crescendo e é temporário. Aceito a fase.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' }
                 ]
             },
-             {
+            {
                 text: "Meus amigos já estão mais desenvolvidos que eu. Devo me preocupar?",
                 options: [
                     { text: "Me comparo constantemente e fico ansioso e inseguro.", effects: { confidence: -20, health: -5 }, sfx: 'fail' },
                     { text: "Entendo que cada pessoa tem seu próprio ritmo de desenvolvimento.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' }
                 ]
             },
-            // NOVAS PERGUNTAS ADICIONADAS
             {
                 text: "Ter 'sonhos molhados' ou acordar com a roupa úmida é normal?",
                 options: [
@@ -185,16 +200,97 @@
                     { text: "Sim, é melhor ser forte e não incomodar os outros com meus problemas.", effects: { confidence: -20, health: -15 }, sfx: 'fail' }
                 ]
             },
+            // NOVOS CENÁRIOS
+            {
+                text: "Meus desodorantes não funcionam mais e estou suando muito. O que devo usar?",
+                options: [
+                    { text: "Lavar mais vezes com sabonete comum, ou usar produtos infantis.", effects: { hygiene: -10, confidence: -10 }, sfx: 'fail' },
+                    { text: "Trocar para um antitranspirante ou sabonete antibacteriano, pois o suor mudou na puberdade.", effects: { hygiene: +20, confidence: +15 }, sfx: 'success' }
+                ]
+            },
+            {
+                text: "Minha voz quebra e não consigo cantar ou falar com clareza. Devo me preocupar?",
+                options: [
+                    { text: "Não, é a 'muda vocal', temporária e normal. O processo é de 6 meses a 2 anos.", effects: { knowledge: +25, confidence: +15 }, sfx: 'success' },
+                    { text: "Sim, devo parar de falar e cantar para não danificar minhas cordas vocais.", effects: { knowledge: -10, confidence: -5 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "Estou crescendo muito rápido, pareço desajeitado e esbarro em tudo. Isso é normal?",
+                options: [
+                    { text: "Sim! É o 'estirão' de crescimento; o corpo está se adaptando ao novo tamanho. A coordenação logo volta.", effects: { knowledge: +20, confidence: +20 }, sfx: 'success' },
+                    { text: "Não! É um sinal de que estou crescendo errado e preciso de sapatos ortopédicos.", effects: { knowledge: -5, confidence: -10 }, sfx: 'fail' }
+                ]
+            }
         ];
+
+        // VARIÁVEIS DE CONTROLE DE PERGUNTAS (Para evitar repetição)
+        let availableScenarios = [];
         
-        // --- FUNÇÕES DE ÁUDIO ---
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function populateAvailableScenarios() {
+            availableScenarios = shuffleArray(scenarios.slice());
+        }
+        
+        function animateSuccess() {
+            // Posiciona e mostra o GIF sobre o personagem
+            sparkleGif.style.top = `${boyCharacter.offsetTop - 50}px`;
+            sparkleGif.style.left = `${boyCharacter.offsetLeft + 50}px`;
+            sparkleGif.style.display = 'block';
+
+            // Esconde o GIF após 1.5 segundos
+            setTimeout(() => {
+                sparkleGif.style.display = 'none';
+            }, 1500);
+        }
+        
+        function watchVideo(videoSrc, reward) {
+            
+            if (pubertyVideo.style.display === 'block') {
+                pubertyVideo.style.display = 'none';
+                pubertyVideo.pause();
+                showMessage('Vídeo fechado. Continue sua jornada!');
+                return;
+            }
+
+            // Esconde o modal de perguntas se estiver aberto
+            document.getElementById('question-modal').style.display = 'none';
+
+            // Exibe e toca o vídeo
+            pubertyVideo.src = `video/${videoSrc}`;
+            pubertyVideo.style.display = 'block';
+            pubertyVideo.play().catch(e => console.log('Video play failed:', e));
+            
+            showMessage('📺 Assista ao vídeo para ganhar Conhecimento! Clique no botão novamente para fechar.');
+
+            // Recompensa imediata por iniciar
+            applyEffects({ knowledge: reward });
+            updateStats();
+            playSound('success'); 
+        }
+
         function playSound(soundName) {
             if (isMuted) return;
-            const sounds = { 'click': sfxClick, 'success': sfxSuccess, 'fail': sfxFail, 'win': sfxWin };
+            const sounds = { 
+                'click': sfxClick, 
+                'success': sfxSuccess, 
+                'fail': sfxFail, 
+                'win': sfxWin,
+                'job-start': sfxJobStart 
+            };
             const sound = sounds[soundName];
             if (sound) {
                 sound.currentTime = 0;
-                // Adicionado .load() para forçar o navegador a ler o arquivo antes de tocar
                 sound.load(); 
                 sound.play().catch(e => console.log('Audio play failed:', e));
             }
@@ -202,79 +298,75 @@
 
         function toggleMute() {
             isMuted = !isMuted;
-            bgMusic.muted = isMuted;
-            sfxClick.muted = isMuted;
-            sfxSuccess.muted = isMuted;
-            sfxFail.muted = isMuted;
-            sfxWin.muted = isMuted; 
+            const allAudios = [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin, sfxJobStart];
+            allAudios.forEach(a => a.muted = isMuted);
             muteButton.textContent = isMuted ? '🔇' : '🔊';
-
-            if (!isMuted) {
-                playMusic();
-            } else {
-                bgMusic.pause();
-                bgMusic.currentTime = 0;
-            }
+            if (!isMuted) playMusic();
+            else bgMusic.pause();
         }
         
         function playMusic() {
             if (isMuted) return;
-            bgMusic.load(); 
+            bgMusic.currentTime = 0;
             bgMusic.play().catch(e => console.log("Autoplay music failed:", e));
         }
-        // --- FIM DAS FUNÇÕES DE ÁUDIO ---
-        
-        // Função para trocar a imagem do avatar
+
         function setCharacterImage(imageName) {
-            boyCharacter.src = `images/${imageName}`; 
+            boyCharacter.src = `images/${imageName}`;
         }
 
-        // --- LÓGICA DE CENÁRIO E PROGRESSO ---
-        
         function updateScenario() {
-            
             if (gameState.medals >= 6) {
-                mainContent.className = 'main-content scenario-3'; 
-                showMessage("✨ Seu conhecimento atingiu a clareza máxima! Desbloqueou Cenário 3!", false);
+                mainContent.className = 'main-content scenario-3';
+                showMessage("✨ Seu conhecimento atingiu o máximo!", false);
             } else if (gameState.medals >= 3) {
                 mainContent.className = 'main-content scenario-2';
             } else {
-                mainContent.className = 'main-content scenario-1'; 
+                mainContent.className = 'main-content scenario-1';
             }
         }
 
         function updateStats() {
             document.getElementById('knowledge').textContent = Math.round(gameState.knowledge) + ' pts';
-            document.getElementById('medals').textContent = gameState.medals; 
-            
+            document.getElementById('medals').textContent = gameState.medals;
             updateScenario();
         }
 
         function giveRewardItem() {
-            gameState.medals += 1; 
-            applyEffects({ knowledge: 30, confidence: 15 }); 
-            
-            showMessage('🎉 PRÊMIO! Você ganhou uma Medalha! Seu conhecimento está crescendo.', false);
+            gameState.medals += 1;
+            applyEffects({ knowledge: 30, confidence: 15 });
+            showMessage('🎉 PRÊMIO! Você ganhou uma Medalha!', false);
             playSound('win');
             updateStats();
         }
 
-
-        // --- LÓGICA DE PERGUNTAS E INTERAÇÃO ---
         function triggerRandomScenario() {
             if (document.getElementById('question-modal').style.display === 'flex') {
-                showMessage("Já temos uma dúvida ativa! Responda primeiro.", true);
+                showMessage("Responda primeiro!", true);
                 playSound('fail');
                 return;
             }
             
-            const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+            if (pubertyVideo.style.display === 'block') {
+                 showMessage("Feche o vídeo antes de interagir com o personagem!", true);
+                 playSound('fail');
+                 return;
+            }
+
+
+            if (availableScenarios.length === 0) {
+                populateAvailableScenarios();
+                showMessage("🎉 Você esgotou o banco de dúvidas! As perguntas foram resetadas.", false);
+            }
+            
+            const scenario = availableScenarios.pop();
+            
             showQuestionModal(scenario);
-            playSound('win'); 
+            playSound('win');
             
             boyCharacter.classList.remove('boy-happy', 'boy-sad');
+            setCharacterImage(imageMap.NEUTRAL); 
             boyCharacter.classList.add('boy-sad'); 
-            
             thoughtBubble.textContent = "Uau, preciso responder isso!";
         }
 
@@ -282,55 +374,49 @@
             const modal = document.getElementById('question-modal');
             const text = document.getElementById('modal-scenario-text');
             const container = document.getElementById('modal-options-container');
-            
             text.textContent = scenario.text;
             container.innerHTML = '';
-            
-            scenario.options.forEach((option, index) => {
+            scenario.options.forEach(option => {
                 const button = document.createElement('button');
                 button.className = 'modal-option';
                 button.textContent = option.text;
-                button.onclick = () => selectOption(option, scenario);
+                button.onclick = () => selectOption(option);
                 container.appendChild(button);
             });
-            
             modal.style.display = 'flex';
         }
-        
-        function selectOption(option, scenario) {
+
+        function selectOption(option) {
             applyEffects(option.effects);
             document.getElementById('question-modal').style.display = 'none';
-            
             playSound(option.sfx);
             
             const isCorrect = option.sfx === 'success';
-
-            const feedbackText = `${isCorrect ? '✅ Resposta Correta!' : '❌ BOMBA! Resposta Incorreta.'}`;
-            showMessage(feedbackText, !isCorrect); 
+            const feedbackText = `${isCorrect ? '✅ Resposta Correta! Ganhou Conhecimento.' : '❌ Resposta Incorreta. Perdeu Confiança.'}`;
+            showMessage(feedbackText, !isCorrect);
             
-            // Reação do personagem
             boyCharacter.classList.remove('boy-happy', 'boy-sad'); 
             
             if (isCorrect) {
+                animateSuccess(); 
                 setCharacterImage(imageMap.HAPPY);
                 boyCharacter.classList.add('boy-happy');
                 thoughtBubble.textContent = "Acertei! Me sinto um super-herói do conhecimento!";
-                giveRewardItem(); 
+                giveRewardItem();
             } else {
                 setCharacterImage(imageMap.SAD);
                 boyCharacter.classList.add('boy-sad');
-                thoughtBubble.textContent = "Que pena, essa dúvida me deixou confuso. Preciso estudar mais.";
+                thoughtBubble.textContent = "Que pena, essa dúvida me deixou confuso.";
             }
-            
-            // Retorna ao estado neutro após 3 segundos
+
             setTimeout(() => {
                 boyCharacter.classList.remove('boy-happy', 'boy-sad');
                 setCharacterImage(imageMap.NEUTRAL); 
                 thoughtBubble.textContent = "Clique no garoto para aprender!";
             }, 3000);
+            
+            updateStats();
         }
-
-        // --- LÓGICA DE GERENCIAMENTO (MANTIDA) ---
 
         function applyEffects(effects) {
             Object.keys(effects).forEach(stat => {
@@ -342,20 +428,28 @@
                     }
                 }
             });
-            if (gameState.health <= 0 || gameState.confidence <= 0) {
-                 showMessage('Fim de jogo! Você não conseguiu gerenciar bem seu desenvolvimento.', true);
-                 playSound('fail');
-                 setTimeout(() => resetRoom(), 3000);
-            }
         }
 
         function doJob(jobType, reward, duration, emoji) {
-            if (gameState.activeJobs.has(jobType)) return;
-            gameState.activeJobs.set(jobType, true);
+            if (gameState.activeJobs.has(jobType)) {
+                showMessage("Aguarde, a pesquisa está em andamento!", true);
+                playSound('fail'); 
+                return;
+            }
             
+            if (pubertyVideo.style.display === 'block') {
+                 showMessage("Feche o vídeo antes de iniciar uma tarefa!", true);
+                 playSound('fail');
+                 return;
+            }
+
+
+            gameState.activeJobs.set(jobType, true);
+            showMessage(`Iniciando ${emoji} Leitura...`);
+            playSound('job-start');
             setTimeout(() => {
                 applyEffects({ knowledge: reward, confidence: 15 });
-                showMessage(`Atividade concluída! Ganho de ${reward} Conhecimento. 🧠`);
+                showMessage(`Atividade concluída! +${reward} Conhecimento 🧠`);
                 playSound('success');
                 gameState.activeJobs.delete(jobType);
                 updateStats();
@@ -363,7 +457,7 @@
         }
 
         function resetRoom() {
-            window.location.reload(); 
+            window.location.reload();
         }
 
         function showMessage(text, isError = false) {
@@ -371,38 +465,28 @@
             message.textContent = text;
             message.className = 'message' + (isError ? ' error' : '');
             message.classList.add('show');
-            
-            setTimeout(() => {
-                message.classList.remove('show');
-            }, 6000);
+            setTimeout(() => message.classList.remove('show'), 6000);
         }
 
-        // --- FUNÇÃO DE INICIALIZAÇÃO CORRIGIDA ---
         document.addEventListener('DOMContentLoaded', () => {
             const startButton = document.getElementById('start-button');
-            
-            // ANTES DE TUDO, CONFIGURA O BOTÃO PARA INICIAR O JOGO E O ÁUDIO
             startButton.addEventListener('click', () => {
                 const splashScreen = document.getElementById('splash-screen');
                 splashScreen.style.opacity = '0';
                 setTimeout(() => {
                     splashScreen.style.display = 'none';
-                    initializeGame(); // INICIA O JOGO APÓS O CLIQUE
+                    isMuted = false;
+                    [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin, sfxJobStart].forEach(a => a.muted = false);
+                    playMusic();
+                    initializeGame();
                 }, 500);
             });
-            
-            // O código abaixo é apenas para configurar o mute button no início, não inicia o jogo
             muteButton.textContent = isMuted ? '🔇' : '🔊';
         });
 
         function initializeGame() {
-            // ESTA FUNÇÃO SÓ RODA DEPOIS QUE O USUÁRIO CLICOU
+            populateAvailableScenarios(); 
             updateStats();
-            // Tenta ligar a música se não estiver no mudo
-            if (isMuted === false) { 
-                playMusic(); 
-            }
-            setupCharacterInteraction();
         }
     </script>
 </body>
