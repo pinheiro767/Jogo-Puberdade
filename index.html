@@ -321,9 +321,8 @@
                 showMessage("✨ Seu conhecimento atingiu o máximo!", false);
             } else if (gameState.medals >= 3) {
                 mainContent.className = 'main-content scenario-2';
-            } else {
-                mainContent.className = 'main-content scenario-1';
             }
+            // Não precisa de else, o CSS padrão fará o resto
         }
 
         function updateStats() {
