@@ -8,13 +8,77 @@
 </head>
 <body>
     
-    <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10001; transition: opacity 0.5s ease;">
-        <h1 style="font-size: 2.5em; margin-bottom: 30px; text-align: center;">Jornada do Herói do Conhecimento</h1>
-        <p style="margin-bottom: 30px; opacity: 0.9;">O áudio será ativado com o seu clique.</p>
-        <button id="start-button" style="padding: 15px 30px; font-size: 1.2em; background: #4CAF50; border: none; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-            🎵 Iniciar Jogo e Ligar Som
-        </button>
+   <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10001; transition: opacity 0.5s ease;">
+        <h1 style="font-size: 1.5em; margin-bottom: 20px; text-align: center;">Assista a esta mensagem importante!</h1>
+        
+        <video id="intro-video" controls width="640" height="360" autoplay>
+            <source src="video/Léo_A_Voz_da_Adolescência_em_Transição.mp4" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
+        
+        <p id="loading-msg" style="margin-top: 20px;">Carregando vídeo...</p>
     </div>
+    
+    ```
+
+### 2. Nova Lógica de Inicialização no JavaScript
+
+Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', ...)` e adicione uma nova função de inicialização do vídeo.
+
+```javascript
+// ... (Seu código JavaScript) ...
+
+        // Referência DOM para o NOVO vídeo de introdução
+        const introVideo = document.getElementById('intro-video');
+
+// ... (Resto do seu script) ...
+
+
+        // --- FUNÇÃO DE INICIALIZAÇÃO CORRIGIDA ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+            const loadingMsg = document.getElementById('loading-msg');
+            
+            // 1. O vídeo é carregado
+            introVideo.load();
+            
+            // 2. Tenta tocar o vídeo (Autoplay pode ser bloqueado, o que acionará o evento 'waiting')
+            introVideo.play().catch(e => {
+                loadingMsg.textContent = "Aperte Play para iniciar a Jornada! (Clique no vídeo)";
+                console.log("Autoplay bloqueado. O usuário deve interagir.", e);
+            });
+
+            // 3. O evento mais importante: o jogo inicia quando o vídeo termina
+            introVideo.addEventListener('ended', () => {
+                // Remove a tela splash
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                    
+                    // Inicializa o som e o jogo
+                    isMuted = false;
+                    [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin, sfxJobStart].forEach(a => a.muted = false);
+                    playMusic();
+                    initializeGame(); 
+                }, 500);
+            });
+            
+            // Opcional: Remove o mute quando o vídeo está pronto para tocar (pois ele tem controles)
+            introVideo.addEventListener('loadeddata', () => {
+                introVideo.muted = false;
+                loadingMsg.style.display = 'none';
+            });
+            
+            muteButton.textContent = isMuted ? '🔇' : '🔊';
+        });
+
+        function initializeGame() {
+            populateAvailableScenarios(); 
+            updateStats();
+        }
+    </script>
+</body>
+</html>
 
     <div class="game-container">
         <div class="sidebar">
