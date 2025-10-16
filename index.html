@@ -8,77 +8,20 @@
 </head>
 <body>
     
-   <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10001; transition: opacity 0.5s ease;">
-        <h1 style="font-size: 1.5em; margin-bottom: 20px; text-align: center;">Assista a esta mensagem importante!</h1>
+    <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10001; transition: opacity 0.5s ease;">
+        <h1 style="font-size: 2.5em; margin-bottom: 30px; text-align: center;">Jornada do Herói do Conhecimento</h1>
         
-        <video id="intro-video" controls width="640" height="360" autoplay>
+        <video id="intro-video" style="display: none; margin-bottom: 20px;" controls width="640" height="360">
             <source src="video/Léo_A_Voz_da_Adolescência_em_Transição.mp4" type="video/mp4">
             Seu navegador não suporta a tag de vídeo.
         </video>
-        
-        <p id="loading-msg" style="margin-top: 20px;">Carregando vídeo...</p>
+
+        <p id="splash-message" style="margin-bottom: 30px; opacity: 0.9;">Clique para ver a introdução e iniciar a Jornada.</p>
+
+        <button id="start-button" style="padding: 15px 30px; font-size: 1.2em; background: #4CAF50; border: none; color: white; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            ▶️ Ver Introdução
+        </button>
     </div>
-    
-    ```
-
-### 2. Nova Lógica de Inicialização no JavaScript
-
-Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', ...)` e adicione uma nova função de inicialização do vídeo.
-
-```javascript
-// ... (Seu código JavaScript) ...
-
-        // Referência DOM para o NOVO vídeo de introdução
-        const introVideo = document.getElementById('intro-video');
-
-// ... (Resto do seu script) ...
-
-
-        // --- FUNÇÃO DE INICIALIZAÇÃO CORRIGIDA ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const splashScreen = document.getElementById('splash-screen');
-            const loadingMsg = document.getElementById('loading-msg');
-            
-            // 1. O vídeo é carregado
-            introVideo.load();
-            
-            // 2. Tenta tocar o vídeo (Autoplay pode ser bloqueado, o que acionará o evento 'waiting')
-            introVideo.play().catch(e => {
-                loadingMsg.textContent = "Aperte Play para iniciar a Jornada! (Clique no vídeo)";
-                console.log("Autoplay bloqueado. O usuário deve interagir.", e);
-            });
-
-            // 3. O evento mais importante: o jogo inicia quando o vídeo termina
-            introVideo.addEventListener('ended', () => {
-                // Remove a tela splash
-                splashScreen.style.opacity = '0';
-                setTimeout(() => {
-                    splashScreen.style.display = 'none';
-                    
-                    // Inicializa o som e o jogo
-                    isMuted = false;
-                    [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin, sfxJobStart].forEach(a => a.muted = false);
-                    playMusic();
-                    initializeGame(); 
-                }, 500);
-            });
-            
-            // Opcional: Remove o mute quando o vídeo está pronto para tocar (pois ele tem controles)
-            introVideo.addEventListener('loadeddata', () => {
-                introVideo.muted = false;
-                loadingMsg.style.display = 'none';
-            });
-            
-            muteButton.textContent = isMuted ? '🔇' : '🔊';
-        });
-
-        function initializeGame() {
-            populateAvailableScenarios(); 
-            updateStats();
-        }
-    </script>
-</body>
-</html>
 
     <div class="game-container">
         <div class="sidebar">
@@ -103,14 +46,7 @@ Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', .
                         <div class="job-reward">+50 Conhecimento, +15 Autoestima (6s)</div>
                     </div>
                 </div>
-                <div class="job-option" onclick="watchVideo('Léo_A_Voz_da_Adolescência_em_Transição.mp4', 40)">
-                    <div class="job-icon">🎬</div>
-                    <div class="job-info">
-                        <div class="job-name">Ver Vídeo: A Voz da Transição</div>
-                        <div class="job-reward">+40 Conhecimento (Imediato)</div>
-                    </div>
                 </div>
-            </div>
 
             <div class="controls">
                 <button class="btn" onclick="resetRoom()">🔄 Recomeçar Jornada</button>
@@ -140,11 +76,6 @@ Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', .
     <div id="success-animation-container">
         <img id="sparkle-gif" src="images/sparkle.gif" alt="Animação de Sucesso" style="width: 100px; height: 100px; display: none; position: absolute; z-index: 100;">
     </div>
-
-    <video id="puberty-video" style="display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); z-index: 200; border: 5px solid #2a5298;" controls width="640" height="360">
-        <source src="video/Léo_A_Voz_da_Adolescência_em_Transição.mp4" type="video/mp4">
-        Seu navegador não suporta a tag de vídeo.
-    </video>
 
     <div id="question-modal">
         <div id="modal-content">
@@ -199,7 +130,13 @@ Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', .
         const thoughtBubble = document.getElementById('thought-bubble');
         const mainContent = document.getElementById('main-content');
         const sparkleGif = document.getElementById('sparkle-gif');
-        const pubertyVideo = document.getElementById('puberty-video');
+        
+        // NOVAS REFERÊNCIAS
+        const introVideo = document.getElementById('intro-video');
+        const startButton = document.getElementById('start-button');
+        const splashScreen = document.getElementById('splash-screen');
+        const splashMessage = document.getElementById('splash-message');
+
 
         const imageMap = {
             NEUTRAL: '1000006911.png',
@@ -318,30 +255,7 @@ Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', .
             }, 1500);
         }
         
-        function watchVideo(videoSrc, reward) {
-            
-            if (pubertyVideo.style.display === 'block') {
-                pubertyVideo.style.display = 'none';
-                pubertyVideo.pause();
-                showMessage('Vídeo fechado. Continue sua jornada!');
-                return;
-            }
-
-            // Esconde o modal de perguntas se estiver aberto
-            document.getElementById('question-modal').style.display = 'none';
-
-            // Exibe e toca o vídeo
-            pubertyVideo.src = `video/${videoSrc}`;
-            pubertyVideo.style.display = 'block';
-            pubertyVideo.play().catch(e => console.log('Video play failed:', e));
-            
-            showMessage('📺 Assista ao vídeo para ganhar Conhecimento! Clique no botão novamente para fechar.');
-
-            // Recompensa imediata por iniciar
-            applyEffects({ knowledge: reward });
-            updateStats();
-            playSound('success'); 
-        }
+        // Removida a função watchVideo, pois o vídeo agora é a introdução
 
         function playSound(soundName) {
             if (isMuted) return;
@@ -386,7 +300,6 @@ Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', .
             } else if (gameState.medals >= 3) {
                 mainContent.className = 'main-content scenario-2';
             }
-            // Não precisa de else, o CSS padrão fará o resto
         }
 
         function updateStats() {
@@ -410,12 +323,7 @@ Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', .
                 return;
             }
             
-            if (pubertyVideo.style.display === 'block') {
-                 showMessage("Feche o vídeo antes de interagir com o personagem!", true);
-                 playSound('fail');
-                 return;
-            }
-
+            // Não precisa verificar o vídeo aqui, pois ele estará escondido após a introdução.
 
             if (availableScenarios.length === 0) {
                 populateAvailableScenarios();
@@ -500,11 +408,7 @@ Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', .
                 return;
             }
             
-            if (pubertyVideo.style.display === 'block') {
-                 showMessage("Feche o vídeo antes de iniciar uma tarefa!", true);
-                 playSound('fail');
-                 return;
-            }
+            // Não precisa verificar o vídeo aqui.
 
 
             gameState.activeJobs.set(jobType, true);
@@ -531,19 +435,50 @@ Substitua a sua antiga função `document.addEventListener('DOMContentLoaded', .
             setTimeout(() => message.classList.remove('show'), 6000);
         }
 
+        // --- LÓGICA DE INICIALIZAÇÃO CORRIGIDA PARA USAR O BOTÃO ---
         document.addEventListener('DOMContentLoaded', () => {
-            const startButton = document.getElementById('start-button');
+            
+            // AÇÃO DO BOTÃO: Ativar o vídeo e o som com a interação do usuário
             startButton.addEventListener('click', () => {
-                const splashScreen = document.getElementById('splash-screen');
+                // 1. Esconde o botão e a mensagem
+                startButton.style.display = 'none';
+                splashMessage.style.display = 'none';
+                
+                // 2. Mostra e liga o vídeo 
+                introVideo.style.display = 'block';
+                introVideo.muted = false; 
+
+                introVideo.play().catch(e => {
+                    // Se o play falhar (raro após o clique), dá uma mensagem de erro
+                    console.log("Erro ao iniciar a reprodução após o clique.", e);
+                    splashMessage.textContent = "Erro ao iniciar. Tente novamente ou verifique as configurações do navegador.";
+                    splashMessage.style.display = 'block';
+                });
+
+                // Inicializa o som de fundo e os SFX (o jogo só inicia após o 'ended')
+                isMuted = false;
+                [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin, sfxJobStart].forEach(a => a.muted = false);
+            });
+
+
+            // EVENTO CHAVE: O JOGO SÓ INICIA QUANDO O VÍDEO TERMINA
+            introVideo.addEventListener('ended', () => {
+                // Toca a música de fundo e inicia o jogo
+                playMusic(); 
+                
+                // Remove a tela splash
                 splashScreen.style.opacity = '0';
                 setTimeout(() => {
                     splashScreen.style.display = 'none';
-                    isMuted = false;
-                    [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin, sfxJobStart].forEach(a => a.muted = false);
-                    playMusic();
-                    initializeGame();
+                    initializeGame(); 
                 }, 500);
             });
+            
+            // Oculta os controles de vídeo antes de iniciar
+            introVideo.addEventListener('loadeddata', () => {
+                introVideo.controls = true; 
+            });
+            
             muteButton.textContent = isMuted ? '🔇' : '🔊';
         });
 
