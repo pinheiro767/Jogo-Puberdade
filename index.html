@@ -39,6 +39,13 @@
                         <div class="job-reward">+50 Conhecimento, +15 Autoestima (6s)</div>
                     </div>
                 </div>
+                <div class="job-option" onclick="watchVideo('Léo_A_Voz_da_Adolescência_em_Transição.mp4', 40)">
+                    <div class="job-icon">🎬</div>
+                    <div class="job-info">
+                        <div class="job-name">Ver Vídeo: A Voz da Transição</div>
+                        <div class="job-reward">+40 Conhecimento (Imediato)</div>
+                    </div>
+                </div>
             </div>
 
             <div class="controls">
@@ -66,6 +73,14 @@
     </div>
     
     <div class="message" id="message"></div>
+    <div id="success-animation-container">
+        <img id="sparkle-gif" src="images/sparkle.gif" alt="Animação de Sucesso" style="width: 100px; height: 100px; display: none; position: absolute; z-index: 100;">
+    </div>
+
+    <video id="puberty-video" style="display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); z-index: 200; border: 5px solid #2a5298;" controls width="640" height="360">
+        <source src="video/Léo_A_Voz_da_Adolescência_em_Transição.mp4" type="video/mp4">
+        Seu navegador não suporta a tag de vídeo.
+    </video>
 
     <div id="question-modal">
         <div id="modal-content">
@@ -76,23 +91,22 @@
 
     <button id="mute-button" onclick="toggleMute()">🔇</button>
 
-    <!-- 🎵 Áudios -->
-    <audio id="background-music" loop>
+    <audio id="background-music" loop muted volume="0.3">
         <source src="audio/bgm.mp3" type="audio/mpeg">
     </audio>
-    <audio id="sfx-click">
+    <audio id="sfx-click" muted>
         <source src="audio/dice_roll.ogg" type="audio/ogg">
     </audio>
-    <audio id="sfx-success">
+    <audio id="sfx-success" muted>
         <source src="audio/coin.wav" type="audio/wav">
     </audio>
-    <audio id="sfx-fail">
+    <audio id="sfx-fail" muted>
         <source src="audio/error.mp3" type="audio/mpeg">
     </audio>
-    <audio id="sfx-win">
+    <audio id="sfx-win" muted>
         <source src="audio/win.wav" type="audio/wav">
     </audio>
-    <audio id="sfx-job-start">
+    <audio id="sfx-job-start" muted>
         <source src="audio/move.mp3" type="audio/mpeg">
     </audio>
 
@@ -115,12 +129,13 @@
         const muteButton = document.getElementById('mute-button');
         let isMuted = true;
 
-        // Ajusta volume
         bgMusic.volume = 0.3;
 
         const boyCharacter = document.getElementById('boy-character');
         const thoughtBubble = document.getElementById('thought-bubble');
         const mainContent = document.getElementById('main-content');
+        const sparkleGif = document.getElementById('sparkle-gif');
+        const pubertyVideo = document.getElementById('puberty-video');
 
         const imageMap = {
             NEUTRAL: '1000006911.png',
@@ -142,10 +157,128 @@
                     { text: "Sinto vergonha e acho que é errado ou doentio.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' },
                     { text: "Entendo que é normal e saudável - faz parte do autoconhecimento.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' }
                 ]
+            },
+            {
+                text: "Minha voz está falhando e às vezes fica rouca. Isso é normal?",
+                options: [
+                    { text: "Fico envergonhado e evito falar alto na escola.", effects: { confidence: -15, knowledge: -5 }, sfx: 'fail' },
+                    { text: "Entendo que a laringe está crescendo e é temporário. Aceito a fase.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' }
+                ]
+            },
+            {
+                text: "Meus amigos já estão mais desenvolvidos que eu. Devo me preocupar?",
+                options: [
+                    { text: "Me comparo constantemente e fico ansioso e inseguro.", effects: { confidence: -20, health: -5 }, sfx: 'fail' },
+                    { text: "Entendo que cada pessoa tem seu próprio ritmo de desenvolvimento.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' }
+                ]
+            },
+            {
+                text: "Ter 'sonhos molhados' ou acordar com a roupa úmida é normal?",
+                options: [
+                    { text: "Sim! São 'poluições noturnas', o corpo libera excesso de sêmen.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
+                    { text: "Não, isso é muito estranho e deve ser um problema hormonal.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "O orgasmo dura sempre o mesmo tempo para todas as pessoas?",
+                options: [
+                    { text: "Não! A duração e a intensidade são diferentes para cada pessoa e momento.", effects: { confidence: +10, knowledge: +20 }, sfx: 'success' },
+                    { text: "Sim, há um tempo médio, se for diferente, algo pode estar errado.", effects: { confidence: -5, knowledge: -5 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "Ter uma ereção 'do nada' (sem pensar nisso) é normal?",
+                options: [
+                    { text: "Sim! É comum na puberdade, causado por reflexos nervosos ou hormônios. É um sinal de corpo saudável.", effects: { confidence: +25, knowledge: +25 }, sfx: 'success' },
+                    { text: "Não, é constrangedor e significa que estou tendo pensamentos inadequados.", effects: { confidence: -20, knowledge: -10 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "O que eu sinto não é importante. Devo guardar tudo para mim?",
+                options: [
+                    { text: "Não! Compartilhar sentimentos com alguém de confiança é fundamental para a saúde mental.", effects: { confidence: +30, health: +15 }, sfx: 'success' },
+                    { text: "Sim, é melhor ser forte e não incomodar os outros com meus problemas.", effects: { confidence: -20, health: -15 }, sfx: 'fail' }
+                ]
+            },
+            // NOVOS CENÁRIOS
+            {
+                text: "Meus desodorantes não funcionam mais e estou suando muito. O que devo usar?",
+                options: [
+                    { text: "Lavar mais vezes com sabonete comum, ou usar produtos infantis.", effects: { hygiene: -10, confidence: -10 }, sfx: 'fail' },
+                    { text: "Trocar para um antitranspirante ou sabonete antibacteriano, pois o suor mudou na puberdade.", effects: { hygiene: +20, confidence: +15 }, sfx: 'success' }
+                ]
+            },
+            {
+                text: "Minha voz quebra e não consigo cantar ou falar com clareza. Devo me preocupar?",
+                options: [
+                    { text: "Não, é a 'muda vocal', temporária e normal. O processo é de 6 meses a 2 anos.", effects: { knowledge: +25, confidence: +15 }, sfx: 'success' },
+                    { text: "Sim, devo parar de falar e cantar para não danificar minhas cordas vocais.", effects: { knowledge: -10, confidence: -5 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "Estou crescendo muito rápido, pareço desajeitado e esbarro em tudo. Isso é normal?",
+                options: [
+                    { text: "Sim! É o 'estirão' de crescimento; o corpo está se adaptando ao novo tamanho. A coordenação logo volta.", effects: { knowledge: +20, confidence: +20 }, sfx: 'success' },
+                    { text: "Não! É um sinal de que estou crescendo errado e preciso de sapatos ortopédicos.", effects: { knowledge: -5, confidence: -10 }, sfx: 'fail' }
+                ]
             }
-            // (demais perguntas omitidas por brevidade)
         ];
+
+        // VARIÁVEIS DE CONTROLE DE PERGUNTAS (Para evitar repetição)
+        let availableScenarios = [];
         
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function populateAvailableScenarios() {
+            availableScenarios = shuffleArray(scenarios.slice());
+        }
+        
+        function animateSuccess() {
+            // Posiciona e mostra o GIF sobre o personagem
+            sparkleGif.style.top = `${boyCharacter.offsetTop - 50}px`;
+            sparkleGif.style.left = `${boyCharacter.offsetLeft + 50}px`;
+            sparkleGif.style.display = 'block';
+
+            // Esconde o GIF após 1.5 segundos
+            setTimeout(() => {
+                sparkleGif.style.display = 'none';
+            }, 1500);
+        }
+        
+        function watchVideo(videoSrc, reward) {
+            
+            if (pubertyVideo.style.display === 'block') {
+                pubertyVideo.style.display = 'none';
+                pubertyVideo.pause();
+                showMessage('Vídeo fechado. Continue sua jornada!');
+                return;
+            }
+
+            // Esconde o modal de perguntas se estiver aberto
+            document.getElementById('question-modal').style.display = 'none';
+
+            // Exibe e toca o vídeo
+            pubertyVideo.src = `video/${videoSrc}`;
+            pubertyVideo.style.display = 'block';
+            pubertyVideo.play().catch(e => console.log('Video play failed:', e));
+            
+            showMessage('📺 Assista ao vídeo para ganhar Conhecimento! Clique no botão novamente para fechar.');
+
+            // Recompensa imediata por iniciar
+            applyEffects({ knowledge: reward });
+            updateStats();
+            playSound('success'); 
+        }
+
         function playSound(soundName) {
             if (isMuted) return;
             const sounds = { 
@@ -188,9 +321,8 @@
                 showMessage("✨ Seu conhecimento atingiu o máximo!", false);
             } else if (gameState.medals >= 3) {
                 mainContent.className = 'main-content scenario-2';
-            } else {
-                mainContent.className = 'main-content scenario-1';
             }
+            // Não precisa de else, o CSS padrão fará o resto
         }
 
         function updateStats() {
@@ -213,9 +345,28 @@
                 playSound('fail');
                 return;
             }
-            const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+            
+            if (pubertyVideo.style.display === 'block') {
+                 showMessage("Feche o vídeo antes de interagir com o personagem!", true);
+                 playSound('fail');
+                 return;
+            }
+
+
+            if (availableScenarios.length === 0) {
+                populateAvailableScenarios();
+                showMessage("🎉 Você esgotou o banco de dúvidas! As perguntas foram resetadas.", false);
+            }
+            
+            const scenario = availableScenarios.pop();
+            
             showQuestionModal(scenario);
             playSound('win');
+            
+            boyCharacter.classList.remove('boy-happy', 'boy-sad');
+            setCharacterImage(imageMap.NEUTRAL); 
+            boyCharacter.classList.add('boy-sad'); 
+            thoughtBubble.textContent = "Uau, preciso responder isso!";
         }
 
         function showQuestionModal(scenario) {
@@ -238,7 +389,31 @@
             applyEffects(option.effects);
             document.getElementById('question-modal').style.display = 'none';
             playSound(option.sfx);
-            if (option.sfx === 'success') giveRewardItem();
+            
+            const isCorrect = option.sfx === 'success';
+            const feedbackText = `${isCorrect ? '✅ Resposta Correta! Ganhou Conhecimento.' : '❌ Resposta Incorreta. Perdeu Confiança.'}`;
+            showMessage(feedbackText, !isCorrect);
+            
+            boyCharacter.classList.remove('boy-happy', 'boy-sad'); 
+            
+            if (isCorrect) {
+                animateSuccess(); 
+                setCharacterImage(imageMap.HAPPY);
+                boyCharacter.classList.add('boy-happy');
+                thoughtBubble.textContent = "Acertei! Me sinto um super-herói do conhecimento!";
+                giveRewardItem();
+            } else {
+                setCharacterImage(imageMap.SAD);
+                boyCharacter.classList.add('boy-sad');
+                thoughtBubble.textContent = "Que pena, essa dúvida me deixou confuso.";
+            }
+
+            setTimeout(() => {
+                boyCharacter.classList.remove('boy-happy', 'boy-sad');
+                setCharacterImage(imageMap.NEUTRAL); 
+                thoughtBubble.textContent = "Clique no garoto para aprender!";
+            }, 3000);
+            
             updateStats();
         }
 
@@ -260,6 +435,14 @@
                 playSound('fail'); 
                 return;
             }
+            
+            if (pubertyVideo.style.display === 'block') {
+                 showMessage("Feche o vídeo antes de iniciar uma tarefa!", true);
+                 playSound('fail');
+                 return;
+            }
+
+
             gameState.activeJobs.set(jobType, true);
             showMessage(`Iniciando ${emoji} Leitura...`);
             playSound('job-start');
@@ -291,7 +474,6 @@
                 splashScreen.style.opacity = '0';
                 setTimeout(() => {
                     splashScreen.style.display = 'none';
-                    // 🔊 Desativa mute e libera sons
                     isMuted = false;
                     [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin, sfxJobStart].forEach(a => a.muted = false);
                     playMusic();
@@ -302,6 +484,7 @@
         });
 
         function initializeGame() {
+            populateAvailableScenarios(); 
             updateStats();
         }
     </script>
