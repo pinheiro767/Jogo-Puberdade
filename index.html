@@ -221,10 +221,97 @@
                 options: [
                     { text: "Sim! É o 'estirão' de crescimento; o corpo está se adaptando ao novo tamanho. A coordenação logo volta.", effects: { knowledge: +20, confidence: +20 }, sfx: 'success' },
                     { text: "Não! É um sinal de que estou crescendo errado e preciso de sapatos ortopédicos.", effects: { knowledge: -5, confidence: -10 }, sfx: 'fail' }
-                ]
-            }
-        ];
-
+"Meus pelos estão crescendo, é normal?",
+        options: [
+            { text: "Sim! O crescimento de pelos corporais é um sinal comum da puberdade causado por hormônios.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' },
+            { text: "Não, isso não é normal. Deve ser algo que comi ou falta de vitaminas.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "A masturbação é uma prática normal na adolescência?",
+        options: [
+            { text: "Sim, é normal e saudável! É uma forma de autoconhecimento e alívio de tensão.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' },
+            { text: "Não, é uma prática errada e pode causar problemas de saúde.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "Meu corpo está estranho — o que é isso?",
+        options: [
+            { text: "As mudanças corporais fazem parte da puberdade. Elas variam entre pessoas e levam tempo.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' },
+            { text: "Sim, algo deve estar errado. O corpo não deve mudar tanto assim.", effects: { confidence: -10, knowledge: -5 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "Por que estou sempre cansado ultimamente?",
+        options: [
+            { text: "Durante a puberdade, o ciclo do sono sofre alterações e os hormônios estão ativos. É normal.", effects: { confidence: +15, health: +10 }, sfx: 'success' },
+            { text: "Isso é só preguiça. Se dormires menos, o corpo acostuma e ficas com mais energia.", effects: { confidence: -10, health: -10 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "Minha voz está falhando e às vezes eu fico rouco, o que é isso?",
+        options: [
+            { text: "É normal! A laringe está a alongar (muda vocal) e depois estabiliza. É temporário.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' },
+            { text: "Fico envergonhado e evito falar. Devo estar a ficar doente ou usei mal a voz.", effects: { confidence: -15, knowledge: -5 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "Devo me comparar com meus amigos que já estão mais desenvolvidos?",
+        options: [
+            { text: "Não! Cada pessoa tem seu próprio ritmo. A puberdade pode começar em idades diferentes.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
+            { text: "Sim. Se estás muito atrasado, é um sinal de que algo está errado com o teu corpo.", effects: { confidence: -20, health: -5 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "É verdade que a gente começa a transpirar mais intensamente?",
+        options: [
+            { text: "Sim! As glândulas de suor ficam mais ativas. Por isso, o banho e o desodorante ajudam.", effects: { hygiene: +20, knowledge: +15 }, sfx: 'success' },
+            { text: "Não, a transpiração é igual a vida toda. Se estás a transpirar muito é porque não te lavas bem.", effects: { hygiene: -10, confidence: -10 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "Eu choro por coisas bobas ou sinto raiva sem motivo. É só frescura?",
+        options: [
+            { text: "Não é frescura! O cérebro e os hormônios estão em desenvolvimento, causando flutuações no humor.", effects: { confidence: +25, health: +10 }, sfx: 'success' },
+            { text: "Sim, é frescura. Pessoas fortes não choram por coisas bobas, tens de te controlar melhor.", effects: { confidence: -20, health: -10 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "É obrigatório ter um pênis grande para ser “homem”?",
+        options: [
+            { text: "Não! O tamanho varia muito e não define masculinidade. O importante é ter um desenvolvimento saudável.", effects: { confidence: +30, knowledge: +20 }, sfx: 'success' },
+            { text: "Sim, o tamanho do pênis é a característica mais importante da masculinidade.", effects: { confidence: -25, knowledge: -10 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "Ter “sonhos molhados” ou acordar com a roupa úmida é normal?",
+        options: [
+            { text: "Sim! São as poluções noturnas. É uma liberação natural de fluidos sexuais durante o sono.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
+            { text: "Não, isso é muito estranho. Significa que fizeste xixi na cama sem perceber.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "O orgasmo dura sempre o mesmo tempo para todas as pessoas?",
+        options: [
+            { text: "Não! O orgasmo é muito variável. A duração e a intensidade são diferentes para cada pessoa.", effects: { confidence: +10, knowledge: +20 }, sfx: 'success' },
+            { text: "Sim, dura sempre 10 segundos. Se for muito diferente, algo pode estar errado.", effects: { confidence: -5, knowledge: -5 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "Ter uma ereção “do nada” (sem pensar nisso) é normal?",
+        options: [
+            { text: "Sim! As ereções espontâneas são comuns devido a hormônios ou reflexos nervosos. É um sinal de corpo saudável.", effects: { confidence: +25, knowledge: +25 }, sfx: 'success' },
+            { text: "Não, é constrangedor e significa que estás sempre a ter pensamentos inadequados.", effects: { confidence: -20, knowledge: -10 }, sfx: 'fail' }
+        ]
+    },
+    {
+        text: "O que eu sinto não é importante. Devo guardar tudo para mim?",
+        options: [
+            { text: "Não! Compartilhar sentimentos com alguém de confiança é fundamental para a sua saúde mental.", effects: { confidence: +30, health: +15 }, sfx: 'success' },
+            { text: "Sim, é melhor ser forte e não incomodar os outros com os teus problemas.", effects: { confidence: -20, health: -15 }, sfx: 'fail' }
+        ]
+    }
+];
         // VARIÁVEIS DE CONTROLE DE PERGUNTAS (Para evitar repetição)
         let availableScenarios = [];
         
