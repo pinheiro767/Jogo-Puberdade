@@ -144,69 +144,113 @@
             SAD: '1000006909.png'
         };
 
+        // =================================================================
+        // === BANCO DE CENÁRIOS ATUALIZADO (INÍCIO) ===
+        // Eu substituí o teu array antigo por este, que contém
+        // todas as perguntas da tua lista inicial.
+        // =================================================================
         const scenarios = [
+            // --- Perguntas que já tinhas, agora atualizadas com o texto completo ---
             {
-                text: "Meus pelos estão crescendo em lugares novos. Isso é normal?",
+                text: "Meus pelos estão crescendo, é normal?",
                 options: [
-                    { text: "Fico preocupado e tento removê-los sem saber como.", effects: { confidence: -10, knowledge: -5 }, sfx: 'fail' },
-                    { text: "Entendo que é normal - hormônios causam crescimento de pelos.", effects: { confidence: +15, knowledge: +20 }, sfx: 'success' }
+                    { text: "Sim! O crescimento de pelos corporais é um sinal comum da puberdade causado por hormônios.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' },
+                    { text: "Fico preocupado e acho que é falta de vitaminas ou algo errado.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
                 ]
             },
             {
-                text: "Tenho curiosidade sobre masturbação. É normal na adolescência?",
+                text: "A masturbação é uma prática normal na adolescência?",
                 options: [
-                    { text: "Sinto vergonha e acho que é errado ou doentio.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' },
-                    { text: "Entendo que é normal e saudável - faz parte do autoconhecimento.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' }
+                    { text: "Sim, é normal e saudável! É uma forma de autoconhecimento e alívio de tensão.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' },
+                    { text: "Sinto vergonha e acho que é errado ou doentio.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
                 ]
             },
             {
-                text: "Minha voz está falhando e às vezes fica rouca. Isso é normal?",
+                text: "Minha voz está falhando e às vezes eu fico rouco, o que é isso?",
                 options: [
-                    { text: "Fico envergonhado e evito falar alto na escola.", effects: { confidence: -15, knowledge: -5 }, sfx: 'fail' },
-                    { text: "Entendo que a laringe está crescendo e é temporário. Aceito a fase.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' }
+                    { text: "É normal! A laringe está a crescer (muda vocal) e depois estabiliza. É temporário.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' },
+                    { text: "Fico envergonhado e evito falar. Deve ser uma infeção.", effects: { confidence: -15, knowledge: -5 }, sfx: 'fail' }
                 ]
             },
             {
-                text: "Meus amigos já estão mais desenvolvidos que eu. Devo me preocupar?",
+                text: "Devo me comparar com meus amigos que já estão mais desenvolvidos?",
                 options: [
-                    { text: "Me comparo constantemente e fico ansioso e inseguro.", effects: { confidence: -20, health: -5 }, sfx: 'fail' },
-                    { text: "Entendo que cada pessoa tem seu próprio ritmo de desenvolvimento.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' }
-                ]
+                    { text: "Não! Cada pessoa tem seu próprio ritmo. A puberdade pode começar em idades diferentes.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
+                    { text: "Sim, se eu for o último é porque algo está errado comigo.", effects: { confidence: -20, health: -5 }, sfx: 'fail' }
+a             ]
             },
             {
-                text: "Ter 'sonhos molhados' ou acordar com a roupa úmida é normal?",
+                text: "Ter “sonhos molhados” ou acordar com a roupa úmida é normal?",
                 options: [
-                    { text: "Sim! São 'poluções noturnas', o corpo libera excesso de sêmen.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
-                    { text: "Não, isso é muito estranho e deve ser um problema hormonal.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
+                    { text: "Sim! São as poluções noturnas. É uma liberação natural de fluidos sexuais durante o sono.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
+                    { text: "Não, isso é muito estranho. Significa que fiz xixi na cama.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
                 ]
             },
             {
                 text: "O orgasmo dura sempre o mesmo tempo para todas as pessoas?",
                 options: [
-                    { text: "Não! A duração e a intensidade são diferentes para cada pessoa e momento.", effects: { confidence: +10, knowledge: +20 }, sfx: 'success' },
-                    { text: "Sim, há um tempo médio, se for diferente, algo pode estar errado.", effects: { confidence: -5, knowledge: -5 }, sfx: 'fail' }
+                    { text: "Não! O orgasmo é muito variável. A duração e a intensidade são diferentes para cada pessoa.", effects: { confidence: +10, knowledge: +20 }, sfx: 'success' },
+                    { text: "Sim, dura sempre 10 segundos. Se for diferente, algo está errado.", effects: { confidence: -5, knowledge: -5 }, sfx: 'fail' }
                 ]
             },
             {
-                text: "Ter uma ereção 'do nada' (sem pensar nisso) é normal?",
+                text: "Ter uma ereção “do nada” (sem pensar nisso) é normal?",
                 options: [
-                    { text: "Sim! É comum na puberdade, causado por reflexos nervosos ou hormônios. É um sinal de corpo saudável.", effects: { confidence: +25, knowledge: +25 }, sfx: 'success' },
-                    { text: "Não, é constrangedor e significa que estou tendo pensamentos inadequados.", effects: { confidence: -20, knowledge: -10 }, sfx: 'fail' }
+                    { text: "Sim! As ereções espontâneas são comuns devido a hormônios ou reflexos nervosos. É um sinal de corpo saudável.", effects: { confidence: +25, knowledge: +25 }, sfx: 'success' },
+                    { text: "Não, é constrangedor e significa que estou sempre a ter pensamentos inadequados.", effects: { confidence: -20, knowledge: -10 }, sfx: 'fail' }
                 ]
             },
             {
                 text: "O que eu sinto não é importante. Devo guardar tudo para mim?",
                 options: [
-                    { text: "Não! Compartilhar sentimentos com alguém de confiança é fundamental para a saúde mental.", effects: { confidence: +30, health: +15 }, sfx: 'success' },
+                    { text: "Não! Compartilhar sentimentos com alguém de confiança é fundamental para a sua saúde mental.", effects: { confidence: +30, health: +15 }, sfx: 'success' },
                     { text: "Sim, é melhor ser forte e não incomodar os outros com meus problemas.", effects: { confidence: -20, health: -15 }, sfx: 'fail' }
+NT           ]
+            },
+
+            // --- Novas Perguntas da Tua Lista (que não estavam no código) ---
+            {
+                text: "Meu corpo está estranho — o que é isso?",
+                options: [
+                    { text: "As mudanças corporais fazem parte da puberdade. Elas variam entre pessoas e levam tempo.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' },
+                    { text: "Deve ser algo que comi. O corpo não deve mudar tanto assim.", effects: { confidence: -10, knowledge: -5 }, sfx: 'fail' }
                 ]
             },
-            // NOVOS CENÁRIOS
+            {
+                text: "Por que estou sempre cansado ultimamente?",
+                options: [
+                    { text: "Durante a puberdade, o ciclo do sono muda e os hormônios estão ativos. É normal precisar de mais sono.", effects: { confidence: +15, health: +10 }, sfx: 'success' },
+                    { text: "Isso é só preguiça. Se dormires menos, o corpo acostuma.", effects: { confidence: -10, health: -10 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "É verdade que a gente começa a transpirar mais intensamente?",
+D               options: [
+                    { text: "Sim! As glândulas de suor ficam mais ativas. Um bom banho e desodorante ajudam.", effects: { hygiene: +20, knowledge: +15 }, sfx: 'success' },
+                    { text: "Não, a transpiração é igual a vida toda. Se estou a transpirar muito é porque estou doente.", effects: { hygiene: -10, confidence: -10 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "Eu choro por coisas bobas ou sinto raiva sem motivo. É só frescura?",
+                options: [
+                    { text: "Não é frescura! O cérebro está em desenvolvimento e os hormônios causam flutuações no humor.", effects: { confidence: +25, health: +10 }, sfx: 'success' },
+                    { text: "Sim, é frescura. Pessoas fortes não choram por coisas bobas, tens de te controlar.", effects: { confidence: -20, health: -10 }, sfx: 'fail' }
+                ]
+            },
+            {
+                text: "É obrigatório ter um pênis grande para ser “homem”?",
+M               options: [
+                    { text: "Não! O tamanho varia muito e não define masculinidade. O importante é ter um desenvolvimento saudável.", effects: { confidence: +30, knowledge: +20 }, sfx: 'success' },
+                    { text: "Sim, o tamanho do pênis é a característica mais importante da masculinidade.", effects: { confidence: -25, knowledge: -10 }, sfx: 'fail' }
+A               ]
+            },
+
+            // --- Perguntas que já tinhas no teu código (cenários de higiene/crescimento) ---
             {
                 text: "Meus desodorantes não funcionam mais e estou suando muito. O que devo usar?",
                 options: [
-                    { text: "Lavar mais vezes com sabonete comum, ou usar produtos infantis.", effects: { hygiene: -10, confidence: -10 }, sfx: 'fail' },
-                    { text: "Trocar para um antitranspirante ou sabonete antibacteriano, pois o suor mudou na puberdade.", effects: { hygiene: +20, confidence: +15 }, sfx: 'success' }
+                    { text: "Trocar para um antitranspirante ou sabonete antibacteriano, pois o suor mudou na puberdade.", effects: { hygiene: +20, confidence: +15 }, sfx: 'success' },
+                    { text: "Lavar mais vezes com sabonete comum, ou usar produtos infantis.", effects: { hygiene: -10, confidence: -10 }, sfx: 'fail' }
                 ]
             },
             {
@@ -224,6 +268,9 @@
                 ]
             }
         ];
+        // =================================================================
+        // === BANCO DE CENÁRIOS ATUALIZADO (FIM) ===
+        // =================================================================
 
         // VARIÁVEIS DE CONTROLE DE PERGUNTAS (Para evitar repetição)
         let availableScenarios = [];
@@ -271,7 +318,7 @@
                 sound.currentTime = 0;
                 sound.load(); 
                 sound.play().catch(e => console.log('Audio play failed:', e));
-            }
+NT         }
         }
 
         function toggleMute() {
@@ -318,7 +365,7 @@
 
         function triggerRandomScenario() {
             if (document.getElementById('question-modal').style.display === 'flex') {
-                showMessage("Responda primeiro!", true);
+a               showMessage("Responda primeiro!", true);
                 playSound('fail');
                 return;
             }
@@ -336,7 +383,7 @@
             playSound('win');
             
             boyCharacter.classList.remove('boy-happy', 'boy-sad');
-            setCharacterImage(imageMap.NEUTRAL); 
+s           setCharacterImage(imageMap.NEUTRAL); 
             boyCharacter.classList.add('boy-sad'); 
             thoughtBubble.textContent = "Uau, preciso responder isso!";
         }
@@ -348,14 +395,14 @@
             text.textContent = scenario.text;
             container.innerHTML = '';
             scenario.options.forEach(option => {
-                const button = document.createElement('button');
+i               const button = document.createElement('button');
                 button.className = 'modal-option';
                 button.textContent = option.text;
                 button.onclick = () => selectOption(option);
                 container.appendChild(button);
             });
             modal.style.display = 'flex';
-        }
+s       }
 
         function selectOption(option) {
             applyEffects(option.effects);
@@ -363,7 +410,7 @@
             playSound(option.sfx);
             
             const isCorrect = option.sfx === 'success';
-            const feedbackText = `${isCorrect ? '✅ Resposta Correta! Ganhou Conhecimento.' : '❌ Resposta Incorreta. Perdeu Confiança.'}`;
+e           const feedbackText = `${isCorrect ? '✅ Resposta Correta! Ganhou Conhecimento.' : '❌ Resposta Incorreta. Perdeu Confiança.'}`;
             showMessage(feedbackText, !isCorrect);
             
             boyCharacter.classList.remove('boy-happy', 'boy-sad'); 
@@ -373,7 +420,7 @@
                 setCharacterImage(imageMap.HAPPY);
                 boyCharacter.classList.add('boy-happy');
                 thoughtBubble.textContent = "Acertei! Me sinto um super-herói!";
-                giveRewardItem();
+T               giveRewardItem();
             } else {
                 setCharacterImage(imageMap.SAD);
                 boyCharacter.classList.add('boy-sad');
@@ -381,7 +428,7 @@
             }
 
             setTimeout(() => {
-                boyCharacter.classList.remove('boy-happy', 'boy-sad');
+e               boyCharacter.classList.remove('boy-happy', 'boy-sad');
                 setCharacterImage(imageMap.NEUTRAL); 
                 thoughtBubble.textContent = "Clique no garoto para aprender!";
             }, 3000);
@@ -391,24 +438,24 @@
 
         function applyEffects(effects) {
             Object.keys(effects).forEach(stat => {
-                if (gameState.hasOwnProperty(stat)) {
+m               if (gameState.hasOwnProperty(stat)) {
                     if (stat !== 'knowledge') {
                         gameState[stat] = Math.max(0, Math.min(100, gameState[stat] + effects[stat]));
                     } else {
-                        gameState[stat] = Math.max(0, gameState[stat] + effects[stat]);
+                    s     gameState[stat] = Math.max(0, gameState[stat] + effects[stat]);
                     }
                 }
             });
         }
 
         function doJob(jobType, reward, duration, emoji) {
-            if (gameState.activeJobs.has(jobType)) {
+s           if (gameState.activeJobs.has(jobType)) {
                 showMessage("Aguarde, a pesquisa está em andamento!", true);
                 playSound('fail'); 
                 return;
             }
             
-            // Não precisa verificar o vídeo aqui.
+    ar       // Não precisa verificar o vídeo aqui.
 
 
             gameState.activeJobs.set(jobType, true);
@@ -438,7 +485,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // AÇÃO DO BOTÃO: Ativar o vídeo e o som com a interação do usuário
-            startButton.addEventListener('click', () => {
+s           startButton.addEventListener('click', () => {
                 // 1. Esconde o botão e a mensagem
                 startButton.style.display = 'none';
                 splashMessage.style.display = 'none';
@@ -454,7 +501,7 @@
                     splashMessage.style.display = 'block';
                 });
 
-                // Inicializa o som de fundo e os SFX (o jogo só inicia após o 'ended')
+  s             // Inicializa o som de fundo e os SFX (o jogo só inicia após o 'ended')
                 isMuted = false;
                 [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin, sfxJobStart].forEach(a => a.muted = false);
             });
@@ -469,14 +516,14 @@
                 splashScreen.style.opacity = '0';
                 setTimeout(() => {
                     splashScreen.style.display = 'none';
-                    initializeGame(); 
+s                   initializeGame(); 
                 }, 500);
             });
             
             // Oculta os controles de vídeo antes de iniciar
             introVideo.addEventListener('loadeddata', () => {
                 introVideo.controls = true; 
-            });
+  s         });
             
             muteButton.textContent = isMuted ? '🔇' : '🔊';
         });
