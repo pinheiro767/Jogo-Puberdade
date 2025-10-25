@@ -146,51 +146,51 @@
 
         const scenarios = [
             {
-                text: "Meus pelos estão crescendo em lugares novos. Isso é normal?",
+                text: "Meus pelos estão crescendo, é normal?",
                 options: [
-                    { text: "Fico preocupado e tento removê-los sem saber como.", effects: { confidence: -10, knowledge: -5 }, sfx: 'fail' },
-                    { text: "Entendo que é normal - hormônios causam crescimento de pelos.", effects: { confidence: +15, knowledge: +20 }, sfx: 'success' }
+                    { text: "Não! Eu devo ficar preocupado e tentar removê-los sem saber como.", effects: { confidence: -10, knowledge: -5 }, sfx: 'fail' },
+                    { text: "Sim! O crescimento de pelos corporais é um sinal comum da puberdade causado por hormônios.", effects: { confidence: +15, knowledge: +20 }, sfx: 'success' }
                 ]
             },
             {
-                text: "Tenho curiosidade sobre masturbação. É normal na adolescência?",
+                text: "A masturbação é uma prática normal na adolescência?",
                 options: [
                     { text: "Sinto vergonha e acho que é errado ou doentio.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' },
-                    { text: "Entendo que é normal e saudável - faz parte do autoconhecimento.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' }
+                    { text: "Sim, é normal e saudável! É uma forma de autoconhecimento e alívio de tensão, comum durante o desenvolvimento.", effects: { confidence: +20, knowledge: +25 }, sfx: 'success' }
                 ]
             },
             {
                 text: "Minha voz está falhando e às vezes fica rouca. Isso é normal?",
                 options: [
-                    { text: "Fico envergonhado e evito falar alto na escola.", effects: { confidence: -15, knowledge: -5 }, sfx: 'fail' },
-                    { text: "Entendo que a laringe está crescendo e é temporário. Aceito a fase.", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' }
+                    { text: "Fico envergonhado e evito falar alto na escola, pois minha voz mudar é algo anormal que devo me preocupar.", effects: { confidence: -15, knowledge: -5 }, sfx: 'fail' },
+                    { text: "É normal! Nesse período, a laringe masculina alonga e as pregas vocais tornam-se mais espessas, alterando a frequência de vibração e causando flutuações entre os tons grave e agudo. Depois estabiliza..", effects: { confidence: +20, knowledge: +20 }, sfx: 'success' }
                 ]
             },
             {
-                text: "Meus amigos já estão mais desenvolvidos que eu. Devo me preocupar?",
+                text: "É obrigatório ter um pênis grande para ser “homem”?",
                 options: [
                     { text: "Me comparo constantemente e fico ansioso e inseguro.", effects: { confidence: -20, health: -5 }, sfx: 'fail' },
-                    { text: "Entendo que cada pessoa tem seu próprio ritmo de desenvolvimento.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' }
+                    { text: "Não! O tamanho varia muito e não define masculinidade. O importante é que você se sinta seguro e tenha um desenvolvimento físico e mental saudáveis.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' }
                 ]
             },
             {
                 text: "Ter 'sonhos molhados' ou acordar com a roupa úmida é normal?",
                 options: [
-                    { text: "Sim! São 'poluções noturnas', o corpo libera excesso de sêmen.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
+                    { text: "Sim! São as poluções noturnas, e ocorrem durante a fase REM do sono, quando a atividade nervosa é mais intensa. Podem estar ligadas a estímulos ou sonhos eróticos. É uma liberação natural de fluidos sexuais.", effects: { confidence: +25, knowledge: +20 }, sfx: 'success' },
                     { text: "Não, isso é muito estranho e deve ser um problema hormonal.", effects: { confidence: -15, knowledge: -10 }, sfx: 'fail' }
                 ]
             },
             {
                 text: "O orgasmo dura sempre o mesmo tempo para todas as pessoas?",
                 options: [
-                    { text: "Não! A duração e a intensidade são diferentes para cada pessoa e momento.", effects: { confidence: +10, knowledge: +20 }, sfx: 'success' },
+                    { text: "Não! O orgasmo é muito variável. A duração e a intensidade são diferentes para cada pessoa e até para a mesma pessoa em momentos diferentes.", effects: { confidence: +10, knowledge: +20 }, sfx: 'success' },
                     { text: "Sim, há um tempo médio, se for diferente, algo pode estar errado.", effects: { confidence: -5, knowledge: -5 }, sfx: 'fail' }
                 ]
             },
             {
                 text: "Ter uma ereção 'do nada' (sem pensar nisso) é normal?",
                 options: [
-                    { text: "Sim! É comum na puberdade, causado por reflexos nervosos ou hormônios. É um sinal de corpo saudável.", effects: { confidence: +25, knowledge: +25 }, sfx: 'success' },
+                    { text: "Sim! As ereções espontâneas são muito comuns na puberdade. São causadas por reflexos nervosos, hormônios ou por pensamentos sexuais. É um sinal de corpo saudável.", effects: { confidence: +25, knowledge: +25 }, sfx: 'success' },
                     { text: "Não, é constrangedor e significa que estou tendo pensamentos inadequados.", effects: { confidence: -20, knowledge: -10 }, sfx: 'fail' }
                 ]
             },
@@ -203,10 +203,10 @@
             },
             // NOVOS CENÁRIOS
             {
-                text: "Meus desodorantes não funcionam mais e estou suando muito. O que devo usar?",
+                text: "É verdade que a gente começa a transpirar mais intensamente?",
                 options: [
-                    { text: "Lavar mais vezes com sabonete comum, ou usar produtos infantis.", effects: { hygiene: -10, confidence: -10 }, sfx: 'fail' },
-                    { text: "Trocar para um antitranspirante ou sabonete antibacteriano, pois o suor mudou na puberdade.", effects: { hygiene: +20, confidence: +15 }, sfx: 'success' }
+                    { text: "Não! Você deve lavar mais vezes com sabonete comum, ou usar produtos infantis.", effects: { hygiene: -10, confidence: -10 }, sfx: 'fail' },
+                    { text: "Sim! As glândulas de suor ficam mais ativas. Por isso, o banho diário e o uso de desodorante podem ajudar.", effects: { hygiene: +20, confidence: +15 }, sfx: 'success' }
                 ]
             },
             {
@@ -217,10 +217,10 @@
                 ]
             },
             {
-                text: "Estou crescendo muito rápido, pareço desajeitado e esbarro em tudo. Isso é normal?",
+                text: "Meu corpo está estranho — o que é isso?",
                 options: [
-                    { text: "Sim! É o 'estirão' de crescimento; o corpo está se adaptando ao novo tamanho. A coordenação logo volta.", effects: { knowledge: +20, confidence: +20 }, sfx: 'success' },
-                    { text: "Não! É um sinal de que estou crescendo errado e preciso de sapatos ortopédicos.", effects: { knowledge: -5, confidence: -10 }, sfx: 'fail' }
+                    { text: "As mudanças corporais fazem parte da puberdade. Elas variam entre pessoas e levam tempo.", effects: { knowledge: +20, confidence: +20 }, sfx: 'success' },
+                    { text: "É um sinal de que estou crescendo errado e preciso de sapatos ortopédicos.", effects: { knowledge: -5, confidence: -10 }, sfx: 'fail' }
                 ]
             }
         ];
