@@ -184,11 +184,9 @@
             SAD: 'images/1000006909.png'
         };
 
-        // --- CENÁRIOS/PERGUNTAS ---
+        // --- CENÁRIOS/PERGUNTAS (COMPLETO) ---
         const scenarios = [
-            // Cola aqui TODOS os teus 46 cenários. 
-            // Exemplo:
-            {
+             {
                 text: "Qual o erro mais comum ao usar um preservativo masculino e como corrigi-lo?",
                 options: [
                     { 
@@ -200,25 +198,823 @@
                     { 
                         text: "Não retirar o ar da ponta do preservativo antes de desenrolá-lo.", 
                         effects: { knowledge: +20, confidence: +15 }, 
-                        feedback: "Correto! O erro mais comum é não retirar o ar da ponta do preservativo...",
+                        feedback: "Correto! O erro mais comum é não retirar o ar da ponta do preservativo. Isso pode criar uma bolha de ar que faz com que o preservativo estoure. Basta apertar suavemente a ponta (reservatório) antes de colocá-lo.",
                         correct: true
                     }
                 ]
             },
-            // ... (restantes 45 cenários) ...
             {
-                text: "Verdade ou Mito: O sexo anal é uma prática de baixo risco para a transmissão de IST...",
+                text: "Por quanto tempo posso guardar um preservativo na carteira ou no porta-luvas do carro?",
                 options: [
                     { 
-                        text: "MITO. O sexo anal é de alto risco...", 
-                        effects: { knowledge: +25, health: +20 }, 
-                        feedback: "Correto! É MITO...",
+                        text: "Não devo guardar em locais com calor e fricção, pois pode danificar o látex.", 
+                        effects: { knowledge: +20, hygiene: +15 }, 
+                        feedback: "Exato! O calor e a fricção podem danificar o látex, tornando o preservativo ineficaz. Guarde em local fresco, seco e protegido, e sempre verifique o prazo de validade.",
                         correct: true
                     },
                     { 
-                        text: "VERDADE. O sexo anal tem menor risco...", 
+                        text: "Posso guardar por vários meses sem problema.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, o calor e a fricção (esfregar na carteira) podem danificar o látex. É melhor guardá-lo em local fresco, seco e protegido.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Existem preservativos para tamanhos de pênis que se encontram fora da média?",
+                options: [
+                    { 
+                        text: "Sim! Existem preservativos com diâmetros diferentes para todos os tamanhos.", 
+                        effects: { knowledge: +15, confidence: +20 }, 
+                        feedback: "Correto! Existem preservativos com diâmetros diferentes para garantir conforto a todos os tamanhos de pênis. Você encontra essa informação na embalagem.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não, todos os preservativos são do mesmo tamanho.", 
+                        effects: { knowledge: -5, confidence: -10 }, 
+                        feedback: "Na verdade, existem preservativos com diâmetros diferentes para garantir conforto e segurança para todos os tamanhos de pênis.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Devo usar camisinha para fazer sexo oral?",
+                options: [
+                    { 
+                        text: "Sim, porque ISTs podem ser transmitidas através do sexo oral.", 
+                        effects: { knowledge: +25, health: +15 }, 
+                        feedback: "Correto! Se o homem tiver uma IST, pode ser transmitida caso haja algum ferimento na boca do parceiro(a). Existem até preservativos com sabores!",
+                        correct: true
+                    },
+                    { 
+                        text: "Não é necessário, o sexo oral é sempre seguro.", 
+                        effects: { knowledge: -15, health: -20 }, 
+                        feedback: "Na verdade, ISTs podem ser transmitidas através do sexo oral se houver ferimentos na boca. É importante usar proteção.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "O lubrificante só serve para quem faz sexo anal?",
+                options: [
+                    { 
+                        text: "Sim, só é necessário para sexo anal.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, lubrificação nunca é demais! Aumenta o prazer, facilita a penetração e diminui o atrito durante qualquer tipo de atividade sexual.",
+                        correct: false
+                    },
+                    { 
+                        text: "Não! Lubrificação aumenta o prazer e facilita qualquer atividade sexual.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Exato! Lubrificação nunca é demais: aumenta o prazer, facilita a penetração, diminui o atrito durante a masturbação masculina e feminina.",
+                        correct: true
+                    }
+                ]
+            },
+            {
+                text: "Para que serve o anel externo do preservativo feminino?",
+                options: [
+                    { 
+                        text: "Serve para manter o preservativo no lugar e cobrir a vulva/área externa.", 
+                        effects: { knowledge: +20, confidence: +10 }, 
+                        feedback: "Correto! O anel externo mantém o preservativo feminino no lugar fora da vagina, cobrindo a vulva/área externa, e é usado para guiar a inserção e remoção.",
+                        correct: true
+                    },
+                    { 
+                        text: "É apenas decorativo, não tem função específica.", 
+                        effects: { knowledge: -15, confidence: -10 }, 
+                        feedback: "Na verdade, o anel externo tem função importante: mantém o preservativo no lugar e cobre a área externa para proteção completa.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Qual a principal vantagem em usar preservativo feminino?",
+                options: [
+                    { 
+                        text: "Dar à mulher autonomia e controle sobre a proteção durante o sexo.", 
+                        effects: { knowledge: +25, confidence: +20 }, 
+                        feedback: "Exato! A principal vantagem é dar à mulher autonomia e controle sobre a proteção durante o sexo, permitindo que ela se proteja independentemente.",
+                        correct: true
+                    },
+                    { 
+                        text: "É mais barato que o preservativo masculino.", 
+                        effects: { knowledge: -5, confidence: -5 }, 
+                        feedback: "A principal vantagem não é o preço, mas sim dar à mulher autonomia e controle sobre sua própria proteção durante o sexo.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Quanto tempo antes do sexo a mulher deve colocar a camisinha feminina?",
+                options: [
+                    { 
+                        text: "Apenas no momento da relação sexual.", 
+                        effects: { knowledge: -5, confidence: -5 }, 
+                        feedback: "Na verdade, a mulher pode inserir o preservativo feminino até 8 horas antes da relação sexual, aumentando a conveniência e espontaneidade.",
+                        correct: false
+                    },
+                    { 
+                        text: "Pode inserir até 8 horas antes da relação sexual.", 
+                        effects: { knowledge: +15, confidence: +15 }, 
+                        feedback: "Correto! A mulher pode inseri-la até 8 horas antes da relação sexual, aumentando a conveniência e espontaneidade.",
+                        correct: true
+                    }
+                ]
+            },
+            {
+                text: "Onde posso encontrar camisinha feminina gratuitamente?",
+                options: [
+                    { 
+                        text: "Na UPA do meu bairro, em local visível e de fácil acesso.", 
+                        effects: { knowledge: +20, health: +15 }, 
+                        feedback: "Correto! Você encontra gratuitamente na UPA do seu bairro. Ela deve estar em local visível e de fácil acesso, preferencialmente ao lado da cesta de camisinha masculina.",
+                        correct: true
+                    },
+                    { 
+                        text: "Só posso comprar em farmácias.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Você pode comprar em farmácias, mas também pode conseguir gratuitamente na UPA do seu bairro, em local visível e de fácil acesso.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "O que é a pílula do dia seguinte?",
+                options: [
+                    { 
+                        text: "É um contraceptivo de emergência para casos pontuais de falha ou ausência de outro método.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É um contraceptivo de emergência que deve ser usado apenas em casos pontuais de falha ou ausência de outro método contraceptivo.",
+                        correct: true
+                    },
+                    { 
+                        text: "É um método contraceptivo regular que posso usar sempre.", 
+                        effects: { knowledge: -20, health: -15 }, 
+                        feedback: "Na verdade, é um contraceptivo de EMERGÊNCIA que deve ser usado apenas em casos pontuais, não como método regular.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "A pílula do dia seguinte pode ser usada como método contraceptivo regular?",
+                options: [
+                    { 
+                        text: "Não, pois sua eficácia é menor e a dose hormonal é muito elevada.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! Não pode ser usada regularmente, pois sua eficácia é menor do que a pílula diária e a dose hormonal é muito elevada.",
+                        correct: true
+                    },
+                    { 
+                        text: "Sim, posso usar sempre que quiser.", 
+                        effects: { knowledge: -20, health: -25 }, 
+                        feedback: "Não! A pílula do dia seguinte tem eficácia menor que métodos regulares e dose hormonal muito alta, não devendo ser usada regularmente.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Existe chance de engravidar após tomar a pílula do dia seguinte?",
+                options: [
+                    { 
+                        text: "Sim! As chances são pequenas, mas não é zero.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Correto! As chances são pequenas, mas não é zero e diminui quanto menos tempo se passa entre a relação e a ingestão da pílula.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não, a pílula garante 100% de proteção.", 
+                        effects: { knowledge: -15, health: -10 }, 
+                        feedback: "Na verdade, ainda existe uma pequena chance de gravidez, especialmente se muito tempo passou entre a relação e tomar a pílula.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Há sangramento após tomar a pílula do dia seguinte?",
+                options: [
+                    { 
+                        text: "Pode ocorrer sangramento até 15 dias após a ingestão.", 
+                        effects: { knowledge: +20, confidence: +10 }, 
+                        feedback: "Correto! Pode ocorrer um sangramento até 15 dias após a ingestão da pílula, devido à variação hormonal provocada pelo hormônio.",
+                        correct: true
+                    },
+                    { 
+                        text: "Nunca causa sangramento.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, pode sim causar sangramento até 15 dias depois, devido às mudanças hormonais que a pílula provoca.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Quando devo tomar a pílula do dia seguinte?",
+                options: [
+                    { 
+                        text: "Quando o preservativo rasga ou estoura, mas sempre consulte um ginecologista.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! Deve ser utilizada quando o preservativo rasga ou estoura, mas lembre-se: uma visita ao ginecologista é sempre importante.",
+                        correct: true
+                    },
+                    { 
+                        text: "Sempre que fizer sexo sem proteção, sem necessidade de orientação médica.", 
+                        effects: { knowledge: -15, health: -20 }, 
+                        feedback: "Deve ser usada apenas em emergências como rompimento do preservativo, e sempre é importante consultar um ginecologista.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Como a pílula do dia seguinte age no meu corpo?",
+                options: [
+                    { 
+                        text: "Dificulta a movimentação do espermatozoide e inibe/atrasa a ovulação.", 
+                        effects: { knowledge: +25, confidence: +15 }, 
+                        feedback: "Correto! Sua função é dificultar a movimentação do espermatozoide dentro do útero e inibir ou atrasar a ovulação, impedindo que espermatozoide e óvulo se encontrem.",
+                        correct: true
+                    },
+                    { 
+                        text: "Mata todos os espermatozoides imediatamente.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, ela dificulta a movimentação dos espermatozoides e inibe/atrasa a ovulação para impedir a fecundação.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "A pílula do dia seguinte tem efeito colateral?",
+                options: [
+                    { 
+                        text: "Sim, devido à alta carga hormonal pode causar dores, diarreia, vômito e atrasos menstruais.", 
+                        effects: { knowledge: +20, health: +15 }, 
+                        feedback: "Correto! Devido à alta carga hormonal, pode causar dores nas mamas e barriga, diarreia, vômito, sangramento vaginal e atrasos na menstruação.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não, é completamente segura sem efeitos colaterais.", 
+                        effects: { knowledge: -15, health: -10 }, 
+                        feedback: "Na verdade, devido à alta carga hormonal, pode sim causar vários efeitos colaterais como dores, náuseas e alterações menstruais.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Existe alguma IST que o preservativo não protege totalmente?",
+                options: [
+                    { 
+                        text: "Sim, HPV e Herpes podem ser transmitidas por áreas não cobertas pelo preservativo.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! O preservativo protege as áreas que cobre, mas ISTs como HPV e Herpes podem ser transmitidas pelo contato com áreas infectadas não cobertas.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não, o preservativo protege 100% contra todas as IST.", 
+                        effects: { knowledge: -15, health: -20 }, 
+                        feedback: "Na verdade, algumas IST como HPV e Herpes podem ser transmitidas por contato com áreas da pele não cobertas pelo preservativo.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Mito ou Verdade: A ducha vaginal após a relação sexual previne gravidez e IST.",
+                options: [
+                    { 
+                        text: "Mito. Pode empurrar bactérias para dentro e desequilibrar a flora vaginal.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É mito. A ducha pode empurrar bactérias e vírus para dentro do colo do útero, além de desequilibrar a flora vaginal, aumentando o risco de infecções.",
+                        correct: true
+                    },
+                    { 
+                        text: "Verdade. É um método eficaz de prevenção.", 
+                        effects: { knowledge: -20, health: -25 }, 
+                        feedback: "É mito! A ducha vaginal não previne gravidez nem ISTs, e pode até aumentar o risco de infecções ao desequilibrar a flora vaginal.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Mito ou Verdade: Sexo não pode acontecer durante a menstruação.",
+                options: [
+                    { 
+                        text: "Mito. É seguro com consentimento mútuo e higiene adequada.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Correto! É mito. É seguro ter relações durante a menstruação com consentimento mútuo e higiene. Pode até trazer benefícios como alívio de cólicas, mas use preservativos.",
+                        correct: true
+                    },
+                    { 
+                        text: "Verdade. É perigoso e deve ser evitado.", 
+                        effects: { knowledge: -15, confidence: -10 }, 
+                        feedback: "É mito! Sexo durante a menstruação é seguro com consentimento e higiene adequada, podendo até aliviar cólicas e melhorar o humor.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Mito ou Verdade: Durante a menstruação não tem risco de engravidar.",
+                options: [
+                    { 
+                        text: "Mito. Ainda há risco, especialmente com ciclos irregulares.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É mito. Embora o risco seja menor, a gravidez ainda é possível, especialmente se o ciclo for irregular. Use métodos contraceptivos se não desejar gravidez.",
+                        correct: true
+                    },
+                    { 
+                        text: "Verdade. É impossível engravidar durante a menstruação.", 
+                        effects: { knowledge: -20, health: -25 }, 
+                        feedback: "É mito! Ainda existe risco de gravidez durante a menstruação, especialmente com ciclos irregulares. Sempre use proteção se não desejar engravidar.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Qual é o único método contraceptivo que oferece proteção contra a maioria das IST?",
+                options: [
+                    { 
+                        text: "O preservativo (feminino ou masculino) oferece dupla proteção.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! O preservativo (feminino ou masculino) é o único método que oferece dupla proteção: contra a gravidez e contra a maioria das IST.",
+                        correct: true
+                    },
+                    { 
+                        text: "A pílula anticoncepcional protege contra IST.", 
+                        effects: { knowledge: -15, health: -20 }, 
+                        feedback: "Na verdade, a pílula só previne gravidez. Apenas o preservativo oferece proteção contra IST e gravidez ao mesmo tempo.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "O que significa 'Consentimento Contínuo' e por que é importante?",
+                options: [
+                    { 
+                        text: "Consentimento deve ser dado em cada etapa e pode ser retirado a qualquer momento.", 
+                        effects: { knowledge: +25, confidence: +20 }, 
+                        feedback: "Correto! Significa que o consentimento deve ser dado e confirmado em cada etapa da atividade sexual, podendo ser retirado a qualquer momento. Consentimento anterior não garante o atual.",
+                        correct: true
+                    },
+                    { 
+                        text: "Uma vez dado o consentimento, vale para toda a relação.", 
+                        effects: { knowledge: -20, confidence: -15 }, 
+                        feedback: "Na verdade, o consentimento deve ser contínuo e pode ser retirado a qualquer momento durante a atividade sexual. Consentimento anterior não garante o atual.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Qual é a diferença entre Orientação Sexual e Identidade de Gênero?",
+                options: [
+                    { 
+                        text: "Orientação Sexual é atração por outros; Identidade de Gênero é o sentido interno de ser homem, mulher ou outro gênero.", 
+                        effects: { knowledge: +25, confidence: +20 }, 
+                        feedback: "Correto! Orientação Sexual é a atração emocional, romântica e/ou sexual por outras pessoas. Identidade de Gênero é o sentido interno de ser homem, mulher, ambos, nenhum, ou outro gênero.",
+                        correct: true
+                    },
+                    { 
+                        text: "São a mesma coisa, apenas termos diferentes.", 
+                        effects: { knowledge: -15, confidence: -10 }, 
+                        feedback: "Na verdade, são conceitos diferentes. Orientação Sexual refere-se à atração por outros, enquanto Identidade de Gênero é como a pessoa se identifica internamente.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Qual é a diferença entre heterossexual e homossexual?",
+                options: [
+                    { 
+                        text: "Heterossexual: atração pelo gênero oposto. Homossexual: atração pelo mesmo gênero.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Correto! Heterossexual sente atração pelo gênero oposto. Homossexual sente atração pelo mesmo gênero.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não há diferença real entre os dois termos.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, há diferença clara: heterossexual é atração pelo gênero oposto, homossexual é atração pelo mesmo gênero.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Qual é a diferença entre bissexual e assexual?",
+                options: [
+                    { 
+                        text: "Bissexual: atração por mais de um gênero. Assexual: falta de atração sexual.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Correto! Bissexual sente atração por mais de um gênero. Assexual caracteriza-se pela falta de atração sexual.",
+                        correct: true
+                    },
+                    { 
+                        text: "Bissexual e assexual são termos sinônimos.", 
+                        effects: { knowledge: -15, confidence: -10 }, 
+                        feedback: "Na verdade, são opostos: bissexual sente atração por múltiplos gêneros, enquanto assexual caracteriza-se pela falta de atração sexual.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Se uma pessoa não tem sintomas visíveis de IST, significa que não tem a infecção?",
+                options: [
+                    { 
+                        text: "Não. Muitas ISTs podem ser assintomáticas por muito tempo.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! Muitas ISTs (como Clamídia e HPV) podem ser assintomáticas durante muito tempo, tornando os testes e o uso de preservativo essenciais mesmo na ausência de sintomas.",
+                        correct: true
+                    },
+                    { 
+                        text: "Sim, sem sintomas significa que não há infecção.", 
+                        effects: { knowledge: -20, health: -25 }, 
+                        feedback: "Na verdade, muitas ISTs podem ser silenciosas por anos. Por isso testes regulares e uso de preservativo são essenciais mesmo sem sintomas.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Na pressa, qual é o erro mais bobo que pode estragar as camisinhas antes mesmo de serem utilizadas?",
+                options: [
+                    { 
+                        text: "Rasgar a embalagem com os dentes ou as unhas.", 
+                        effects: { knowledge: +25, hygiene: +20 }, 
+                        feedback: "Correto! Rasgar com dentes ou unhas pode criar microfuros invisíveis que anulam a proteção. Sempre use os dedos para rasgar na borda serrilhada e guarde em locais frescos.",
+                        correct: true
+                    },
+                    { 
+                        text: "Abrir a embalagem muito devagar.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, o problema é rasgar com dentes ou unhas, criando microfuros. Abrir devagar com os dedos na borda serrilhada é o correto.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Qual lado é o certo para desenrolar a camisinha masculina e o que fazer se colocar no lado errado?",
+                options: [
+                    { 
+                        text: "Lado certo: borda para fora como um chapéu. Se errar e tocar no pênis, jogue fora e pegue outra.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! O lado certo tem a borda para fora. Se começou errado e tocou no pênis, jogue fora! Fluidos pré-ejaculatórios podem ter contaminado a parte interna.",
+                        correct: true
+                    },
+                    { 
+                        text: "Posso virar do avesso se colocar errado.", 
+                        effects: { knowledge: -20, health: -25 }, 
+                        feedback: "Nunca vire do avesso! Se tocou no pênis do lado errado, fluidos pré-ejaculatórios podem ter contaminado. Jogue fora e use outra.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Por que é crucial apertar a pontinha (o 'bico') antes de desenrolar?",
+                options: [
+                    { 
+                        text: "Para tirar o ar do reservatório e evitar que estoure na ejaculação.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! A pontinha é o reservatório do esperma. Se não tirar o ar, a pressão da ejaculação pode estourar o preservativo. Segure com dois dedos para tirar o ar.",
+                        correct: true
+                    },
+                    { 
+                        text: "É apenas para facilitar o desenrolar.", 
+                        effects: { knowledge: -15, health: -10 }, 
+                        feedback: "Na verdade, é para tirar o ar do reservatório. Sem isso, a pressão da ejaculação pode estourar o preservativo.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Tenho que desenrolar até o final, até a base?",
+                options: [
+                    { 
+                        text: "Sim, totalmente! A camisinha só protege se cobrir o pênis por inteiro.", 
+                        effects: { knowledge: +20, health: +15 }, 
+                        feedback: "Correto! Deve desenrolar completamente até a base. É ali que a borda forma uma 'barreira' que ajuda a prender o esperma e garante proteção total.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não precisa, só cobrir a cabeça já protege.", 
+                        effects: { knowledge: -20, health: -25 }, 
+                        feedback: "Na verdade, deve cobrir completamente da cabeça até a base. A borda na base é essencial para prender o esperma e garantir proteção.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Na hora de tirar, como garantir que não vai vazar nada?",
+                options: [
+                    { 
+                        text: "Ser rápido após ejaculação: segurar a borda, retirar devagar e jogar no lixo.", 
+                        effects: { knowledge: +25, hygiene: +20 }, 
+                        feedback: "Correto! Seja rápido antes que o pênis amoleça: segure a borda na base, retire devagar e jogue no lixo (nunca no vaso sanitário).",
+                        correct: true
+                    },
+                    { 
+                        text: "Posso esperar o pênis amolecer antes de tirar.", 
+                        effects: { knowledge: -20, health: -15 }, 
+                        feedback: "Na verdade, deve ser rápido antes que amoleça, senão pode vazar. Segure a borda, retire devagar e descarte adequadamente.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Posso colocar a camisinha feminina com antecedência?",
+                options: [
+                    { 
+                        text: "Sim, essa é uma grande vantagem! Pode colocar horas antes da relação.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Correto! Pode colocar horas antes, tirando a pressão do momento. O anel maior fica fora cobrindo a entrada, e o menor bem fundo dentro.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não, só pode colocar na hora da relação.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, uma das vantagens é poder colocar com antecedência, até 8 horas antes, garantindo que a proteção já está pronta.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "O anel menor precisa ficar muito fundo? Como coloco?",
+                options: [
+                    { 
+                        text: "Sim, aperte com os dedos como absorvente interno e empurre o mais fundo possível.", 
+                        effects: { knowledge: +25, confidence: +20 }, 
+                        feedback: "Correto! O anel menor prende a camisinha dentro. Aperte com os dedos e empurre fundo. É normal ficar frouxo ou torcido - essa folga permite ajuste.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não precisa ir muito fundo, só um pouco dentro já serve.", 
+                        effects: { knowledge: -15, health: -10 }, 
+                        feedback: "Na verdade, deve ir o mais fundo possível para prender bem. É o anel menor que mantém o preservativo no lugar durante a relação.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Como garantir que o pênis vai entrar dentro da camisinha e não ao lado?",
+                options: [
+                    { 
+                        text: "O anel externo funciona como 'guia'. Use lubrificante para penetração mais suave.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Correto! O anel maior fica fora cobrindo a entrada e funciona como guia. Lubrificante à base de água ou silicone ajuda a evitar que escorregue para o lado.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não há como garantir, é questão de sorte.", 
+                        effects: { knowledge: -15, confidence: -10 }, 
+                        feedback: "Na verdade, o anel externo serve exatamente como guia para direcionar corretamente. Com lubrificante adequado, fica ainda mais seguro.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "O que NUNCA posso fazer com o preservativo feminino?",
+                options: [
+                    { 
+                        text: "NUNCA usar junto com camisinha masculina - o atrito pode rasgar ambas.", 
+                        effects: { knowledge: +25, health: +25 }, 
+                        feedback: "Correto! NUNCA use preservativo feminino junto com masculino! O atrito entre os dois materiais pode rasgar ambas as camisinhas, perdendo toda a proteção.",
+                        correct: true
+                    },
+                    { 
+                        text: "Posso usar os dois juntos para dupla proteção.", 
+                        effects: { knowledge: -25, health: -30 }, 
+                        feedback: "NUNCA faça isso! Usar os dois juntos cria atrito que pode rasgar ambos os preservativos, eliminando completamente a proteção.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Qual é a importância da comunicação e do consentimento em todas as relações sexuais?",
+                options: [
+                    { 
+                        text: "A comunicação aberta e o consentimento são a base de qualquer relação sexual saudável e respeitosa.", 
+                        effects: { knowledge: +25, confidence: +20 }, 
+                        feedback: "Correto! O consentimento deve ser claro, entusiástico e pode ser retirado a qualquer momento. É essencial para garantir que ambos os parceiros se sintam seguros e confortáveis, e para prevenir abusos.",
+                        correct: true
+                    },
+                    { 
+                        text: "Não é necessário conversar muito, o importante é a atração física.", 
+                        effects: { knowledge: -20, confidence: -15 }, 
+                        feedback: "Na verdade, a comunicação e o consentimento são fundamentais para relações saudáveis. Sem eles, não há segurança nem respeito mútuo.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Qual é a diferença entre libido e desejo sexual?",
+                options: [
+                    { 
+                        text: "Libido é o impulso sexual geral; desejo sexual é a vontade específica de ter atividade sexual.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Correto! A libido é mais como o 'motor', enquanto o desejo é a 'vontade de dirigir'. São conceitos relacionados mas distintos.",
+                        correct: true
+                    },
+                    { 
+                        text: "São a mesma coisa, apenas termos diferentes.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, são conceitos diferentes: libido é o impulso geral, desejo é a vontade específica de atividade sexual.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "O que é 'sexting' e quais os riscos associados se não for feito com consentimento e segurança?",
+                options: [
+                    { 
+                        text: "É enviar conteúdo sexual explícito. Riscos incluem exposição não consensual e pornografia de vingança.", 
+                        effects: { knowledge: +25, confidence: +20 }, 
+                        feedback: "Correto! Sexting é o ato de enviar mensagens, fotos ou vídeos sexuais. A distribuição não consensual é ilegal e pode ter graves consequências emocionais e legais.",
+                        correct: true
+                    },
+                    { 
+                        text: "É sempre seguro e não há riscos se for entre pessoas que se conhecem.", 
+                        effects: { knowledge: -20, confidence: -15 }, 
+                        feedback: "Na verdade, sempre há riscos como exposição não consensual. É importante ter cuidado e consentimento mesmo entre conhecidos.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Explique brevemente o conceito de 'Zona de Conforto' na sexualidade.",
+                options: [
+                    { 
+                        text: "São as práticas com as quais uma pessoa se sente segura e à vontade. Explorar fora requer comunicação e consentimento.", 
+                        effects: { knowledge: +20, confidence: +15 }, 
+                        feedback: "Correto! A 'Zona de Conforto' refere-se às práticas, fantasias e níveis de intimidade seguros. Explorar além requer comunicação, confiança e consentimento mútuo.",
+                        correct: true
+                    },
+                    { 
+                        text: "É um limite que nunca deve ser ultrapassado em relacionamentos.", 
+                        effects: { knowledge: -10, confidence: -5 }, 
+                        feedback: "Na verdade, a zona de conforto pode ser expandida com comunicação, confiança e consentimento mútuo entre parceiros.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: Esquecer a pílula anticoncepcional num dia, mas tomá-la no dia seguinte, anula completamente o risco de gravidez.",
+                options: [
+                    { 
+                        text: "MITO. A proteção pode ser reduzida e métodos adicionais devem ser usados.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É MITO. A eficácia da pílula depende da tomada correta e diária. Se falhar um dia, use métodos adicionais como preservativo nos dias seguintes.",
+                        correct: true
+                    },
+                    { 
+                        text: "VERDADE. Tomar no dia seguinte mantém a proteção total.", 
+                        effects: { knowledge: -20, health: -15 }, 
+                        feedback: "É MITO! Esquecer a pílula pode reduzir a proteção. É importante usar métodos contraceptivos adicionais conforme orientação médica.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: É seguro usar dois preservativos ao mesmo tempo para maior proteção.",
+                options: [
+                    { 
+                        text: "MITO. O atrito entre eles faz com que ambos se rasguem mais facilmente.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É MITO. Usar dois preservativos aumenta o atrito entre eles, fazendo com que ambos se rasguem. Use sempre apenas um de cada vez.",
+                        correct: true
+                    },
+                    { 
+                        text: "VERDADE. Dois preservativos oferecem proteção dupla.", 
                         effects: { knowledge: -25, health: -25 }, 
-                        feedback: "É MITO! O sexo anal tem MAIOR risco...",
+                        feedback: "É MITO! Dois preservativos criam atrito que pode rasgar ambos. Isso é mais perigoso que usar apenas um corretamente.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: A pílula do dia seguinte pode ser usada como método contraceptivo regular.",
+                options: [
+                    { 
+                        text: "MITO. É apenas para emergências e pode causar desequilíbrios hormonais.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É MITO. A pílula do dia seguinte é apenas para emergências. Usar regularmente pode causar desequilíbrios hormonais e é menos eficaz que métodos regulares.",
+                        correct: true
+                    },
+                    { 
+                        text: "VERDADE. Pode ser usada sempre que necessário.", 
+                        effects: { knowledge: -25, health: -25 }, 
+                        feedback: "É MITO! A pílula do dia seguinte é só para emergências. Uso regular pode ser prejudicial à saúde e menos eficaz.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: É possível engravidar mesmo usando preservativo corretamente.",
+                options: [
+                    { 
+                        text: "VERDADE. Nenhum método contraceptivo é 100% eficaz.", 
+                        effects: { knowledge: +20, health: +15 }, 
+                        feedback: "Correto! É VERDADE. O preservativo tem cerca de 98% de eficácia quando usado corretamente, mas ainda existe uma pequena possibilidade de falha.",
+                        correct: true
+                    },
+                    { 
+                        text: "MITO. O preservativo garante 100% de proteção contra gravidez.", 
+                        effects: { knowledge: -15, health: -10 }, 
+                        feedback: "Na verdade é VERDADE que pode engravidar. Nenhum método é 100% eficaz, embora o preservativo seja muito eficiente quando usado corretamente.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: Toda IST apresenta sintomas visíveis.",
+                options: [
+                    { 
+                        text: "MITO. Muitas ISTs podem ser assintomáticas por longos períodos.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É MITO. Muitas ISTs (como Clamídia, HPV e HIV) podem ser assintomáticas por longos períodos. Por isso é importante fazer testes regulares e usar sempre preservativo.",
+                        correct: true
+                    },
+                    { 
+                        text: "VERDADE. Todas as ISTs causam sintomas evidentes.", 
+                        effects: { knowledge: -20, health: -25 }, 
+                        feedback: "É MITO! Muitas ISTs são silenciosas por anos. Por isso testes regulares e uso de preservativo são essenciais mesmo sem sintomas.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: O preservativo protege contra todas as ISTs.",
+                options: [
+                    { 
+                        text: "MITO. Algumas ISTs podem ser transmitidas por áreas não cobertas pelo preservativo.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É MITO. O preservativo protege contra a maioria das ISTs, mas algumas como HPV e Herpes podem ser transmitidas pelo contato com áreas da pele não cobertas.",
+                        correct: true
+                    },
+                    { 
+                        text: "VERDADE. O preservativo oferece proteção total contra todas as ISTs.", 
+                        effects: { knowledge: -20, health: -15 }, 
+                        feedback: "É MITO! Embora proteja contra a maioria, algumas ISTs como HPV e Herpes podem ser transmitidas por contato com pele não coberta.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: Lubrificantes à base de óleo são seguros para usar com preservativos de látex.",
+                options: [
+                    { 
+                        text: "MITO. Lubrificantes à base de óleo podem danificar o látex do preservativo.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É MITO. Lubrificantes à base de óleo (como vaselina) podem danificar o látex, tornando-o menos eficaz. Use sempre lubrificantes à base de água ou silicone com preservativos de látex.",
+                        correct: true
+                    },
+                    { 
+                        text: "VERDADE. Qualquer lubrificante pode ser usado com preservativos.", 
+                        effects: { knowledge: -25, health: -25 }, 
+                        feedback: "É MITO! Lubrificantes à base de óleo danificam o látex. Use apenas lubrificantes à base de água ou silicone com preservativos de látex.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: É possível engravidar tendo relação sexual durante a menstruação.",
+                options: [
+                    { 
+                        text: "VERDADE. Espermatozoides podem sobreviver vários dias e a ovulação pode ocorrer mais cedo.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É VERDADE. Embora a probabilidade seja menor, espermatozoides podem sobreviver por vários dias no corpo feminino, e a ovulação pode ocorrer mais cedo em alguns ciclos. Sempre use proteção se não deseja engravidar.",
+                        correct: true
+                    },
+                    { 
+                        text: "MITO. É impossível engravidar durante a menstruação.", 
+                        effects: { knowledge: -20, health: -25 }, 
+                        feedback: "É VERDADE que é possível! Espermatozoides sobrevivem dias no corpo e a ovulação pode variar. Sempre use proteção se não desejar gravidez.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: IST é um problema de saúde apenas para pessoas sexualmente ativas com múltiplos parceiros.",
+                options: [
+                    { 
+                        text: "MITO. Qualquer pessoa sexualmente ativa pode contrair uma IST, independentemente do número de parceiros.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É MITO. Qualquer pessoa sexualmente ativa pode contrair uma IST, independentemente do número de parceiros. O risco está na prática sexual desprotegida, não na quantidade de parceiros.",
+                        correct: true
+                    },
+                    { 
+                        text: "VERDADE. Só quem tem múltiplos parceiros corre risco de IST.", 
+                        effects: { knowledge: -25, health: -25 }, 
+                        feedback: "É MITO! Mesmo com um único parceiro, se houver prática desprotegida, existe risco de IST. O importante é sempre usar proteção.",
+                        correct: false
+                    }
+                ]
+            },
+            {
+                text: "Verdade ou Mito: O sexo anal é uma prática de baixo risco para a transmissão de IST em comparação com o sexo vaginal.",
+                options: [
+                    { 
+                        text: "MITO. O sexo anal é de alto risco devido à fragilidade do tecido anal.", 
+                        effects: { knowledge: +25, health: +20 }, 
+                        feedback: "Correto! É MITO. O sexo anal é uma prática de alto risco para IST (incluindo HIV) devido à maior fragilidade do tecido anal, que pode sofrer microlesões facilmente. O uso correto do preservativo e lubrificante é essencial.",
+                        correct: true
+                    },
+                    { 
+                        text: "VERDADE. O sexo anal tem menor risco de transmissão de IST.", 
+                        effects: { knowledge: -25, health: -25 }, 
+                        feedback: "É MITO! O sexo anal tem MAIOR risco devido à fragilidade do tecido anal. Sempre use preservativo e lubrificante adequado para reduzir riscos.",
                         correct: false
                     }
                 ]
@@ -226,6 +1022,7 @@
         ];
 
         // --- FUNÇÕES DE ÁUDIO ---
+        // (Funções playSound, toggleMute, playMusic - como na resposta anterior)
         function playSound(soundName) {
             if (isMuted) return;
             const sounds = { 
@@ -233,15 +1030,14 @@
             };
             const sound = sounds[soundName];
             if (sound) {
-                sound.currentTime = 0; // Reinicia o áudio
-                // sound.load(); // Não é geralmente necessário com play()
+                sound.currentTime = 0;
                 sound.play().catch(e => console.error('Audio play failed:', e));
             }
         }
 
         function toggleMute() {
             isMuted = !isMuted;
-            soundEnabled = !soundEnabled; // Sincroniza efeitos visuais com áudio
+            soundEnabled = !soundEnabled; 
             
             const allAudios = [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin];
             allAudios.forEach(a => a.muted = isMuted);
@@ -249,65 +1045,49 @@
             muteButton.textContent = isMuted ? '🔇' : '🔊';
             
             if (!isMuted) {
-                playMusic(); // Tenta tocar a música se desmutar
+                playMusic(); 
                 showNotification('🔊 Áudio e efeitos visuais ativados!', 'success');
             } else {
-                bgMusic.pause(); // Pausa a música se mutar
+                bgMusic.pause(); 
                 showNotification('🔇 Áudio e efeitos visuais desativados', 'info');
             }
         }
 
         function playMusic() {
-            if (isMuted || !bgMusic.paused) return; // Não toca se já estiver tocando
+            if (isMuted || !bgMusic.paused) return; 
             bgMusic.currentTime = 0;
-            bgMusic.play().catch(e => console.error("Autoplay music failed:", e));
+            // Tenta tocar, mas pode falhar se o utilizador não interagiu ainda
+            bgMusic.play().catch(e => console.warn("Music play failed, likely requires user interaction first:", e));
         }
-        
+
         // --- FUNÇÕES DE EFEITOS VISUAIS (CSS) ---
-        function playVisualEffect(type) {
+        // (Funções playVisualEffect, createSuccessEffect, createSparkle, createDiamond, createErrorEffect, createCrackLine, createWinEffect, createClickEffect - como na resposta anterior)
+         function playVisualEffect(type) {
             if (!soundEnabled) return; 
-            const gameContainer = document.querySelector('.game-container'); // Precisa da referência aqui
+            const gameContainer = document.querySelector('.game-container'); 
             
             switch(type) {
-                case 'success':
-                    createSuccessEffect(gameContainer); // Passa a referência
-                    break;
-                case 'fail':
-                    createErrorEffect(gameContainer); // Passa a referência
-                    break;
-                case 'win':
-                    createWinEffect(gameContainer); // Passa a referência
-                    break;
-                default: // 'click'
-                    createClickEffect();
+                case 'success': createSuccessEffect(gameContainer); break;
+                case 'fail': createErrorEffect(gameContainer); break;
+                case 'win': createWinEffect(gameContainer); break;
+                default: createClickEffect();
             }
         }
 
-        function createSuccessEffect(gameContainer) { // Recebe gameContainer
+        function createSuccessEffect(gameContainer) { 
             const overlay = document.createElement('div');
             overlay.className = 'success-overlay';
             document.body.appendChild(overlay);
-            
             gameContainer.classList.add('success-glow');
-            
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    createSparkle();
-                    if (i % 2 === 0) createDiamond();
-                }, i * 100);
-            }
-            
-            setTimeout(() => {
-                overlay.remove();
-                gameContainer.classList.remove('success-glow');
-            }, 2000);
+            for (let i = 0; i < 15; i++) { setTimeout(() => { createSparkle(); if (i % 2 === 0) createDiamond(); }, i * 100); }
+            setTimeout(() => { overlay.remove(); gameContainer.classList.remove('success-glow'); }, 2000);
         }
 
         function createSparkle() {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
             sparkle.textContent = Math.random() > 0.5 ? '✨' : '⭐';
-            sparkle.style.left = `${Math.random() * 100}vw`; // Usa vw/vh para cobrir a tela
+            sparkle.style.left = `${Math.random() * 100}vw`; 
             sparkle.style.top = `${Math.random() * 100}vh`;
             document.body.appendChild(sparkle);
             setTimeout(() => sparkle.remove(), 2000);
@@ -323,244 +1103,142 @@
             setTimeout(() => diamond.remove(), 2500);
         }
 
-        function createErrorEffect(gameContainer) { // Recebe gameContainer
+        function createErrorEffect(gameContainer) { 
             gameContainer.classList.add('shake-screen');
-            
             const crackOverlay = document.createElement('div');
             crackOverlay.className = 'crack-overlay';
             document.body.appendChild(crackOverlay);
-            
             gameContainer.classList.add('error-flash');
-            
-            for (let i = 0; i < 8; i++) {
-                setTimeout(createCrackLine, i * 100);
-            }
-            
-            setTimeout(() => {
-                gameContainer.classList.remove('shake-screen', 'error-flash');
-                crackOverlay.remove();
-            }, 1500);
+            for (let i = 0; i < 8; i++) { setTimeout(createCrackLine, i * 100); }
+            setTimeout(() => { gameContainer.classList.remove('shake-screen', 'error-flash'); crackOverlay.remove(); }, 1500);
         }
 
         function createCrackLine() {
             const crack = document.createElement('div');
             crack.className = 'crack-line';
-            
             const isVertical = Math.random() > 0.5;
-            if (isVertical) {
-                crack.style.width = '2px';
-                crack.style.height = `${Math.random() * 200 + 50}px`;
-            } else {
-                crack.style.width = `${Math.random() * 200 + 50}px`;
-                crack.style.height = '2px';
-            }
-            crack.style.left = `${Math.random() * 100}vw`;
-            crack.style.top = `${Math.random() * 100}vh`;
-            
+            if (isVertical) { crack.style.width = '2px'; crack.style.height = `${Math.random() * 200 + 50}px`; } 
+            else { crack.style.width = `${Math.random() * 200 + 50}px`; crack.style.height = '2px'; }
+            crack.style.left = `${Math.random() * 100}vw`; crack.style.top = `${Math.random() * 100}vh`;
             document.body.appendChild(crack);
             setTimeout(() => crack.remove(), 1000);
         }
 
-        function createWinEffect(gameContainer) { // Recebe gameContainer
-            createSuccessEffect(gameContainer); // Usa o efeito base
-            setTimeout(() => {
-                for (let i = 0; i < 20; i++) {
-                    setTimeout(() => {
-                        createSparkle();
-                        createDiamond();
-                    }, i * 50);
-                }
-            }, 500); // Adiciona mais brilho depois
+        function createWinEffect(gameContainer) { 
+            createSuccessEffect(gameContainer); 
+            setTimeout(() => { for (let i = 0; i < 20; i++) { setTimeout(() => { createSparkle(); createDiamond(); }, i * 50); } }, 500);
         }
 
         function createClickEffect() {
-            // Este não precisa do gameContainer, é um pop-up simples
             const effect = document.createElement('div');
-            effect.style.cssText = `
-                position: fixed; top: 50%; left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 3em; z-index: 9999;
-                pointer-events: none;
-                animation: effectPop 1s ease forwards;
-                color: #4a90e2;
-            `;
+            effect.style.cssText = `position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3em; z-index: 9999; pointer-events: none; animation: effectPop 1s ease forwards; color: #4a90e2;`;
             effect.textContent = '⭐';
             document.body.appendChild(effect);
             setTimeout(() => effect.remove(), 1000);
         }
-        
+
         // --- FUNÇÕES DE FEEDBACK VISUAL ---
-        function showNotification(message, type = 'info') {
+        // (Funções showNotification, showMessage - como na resposta anterior)
+         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed; top: 80px; right: 20px;
-                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#4a90e2'};
-                color: white; padding: 15px 20px; border-radius: 10px;
-                z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                animation: slideIn 0.3s ease;
-            `;
+            notification.style.cssText = `position: fixed; top: 80px; right: 20px; background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#4a90e2'}; color: white; padding: 15px 20px; border-radius: 10px; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); animation: slideIn 0.3s ease;`;
             notification.textContent = message;
-            
             document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease forwards';
-                setTimeout(() => notification.remove(), 300); // Remove após animação
-            }, 3000); // Duração da notificação
+            setTimeout(() => { notification.style.animation = 'slideOut 0.3s ease forwards'; setTimeout(() => notification.remove(), 300); }, 3000);
         }
 
         function showMessage(text) {
             messageDiv.textContent = text;
             messageDiv.style.display = 'block';
-            // Usa classes CSS para animação (se existirem no styles.css)
-            // messageDiv.classList.add('show'); 
-            
-            setTimeout(() => {
-                 messageDiv.style.display = 'none';
-                 // messageDiv.classList.remove('show');
-            }, 4000); // Duração da mensagem
+            setTimeout(() => { messageDiv.style.display = 'none'; }, 4000);
         }
 
         // --- FUNÇÕES DE CONTROLO DO JOGO ---
+        // (Funções startGame, triggerRandomScenario, showScenarioModal, selectModalOption - como na resposta anterior)
         function startGame() {
-            welcomeSection.style.display = 'none'; // Esconde a secção de boas-vindas
-            gameContent.style.display = 'block'; // Mostra o conteúdo principal do jogo
+            welcomeSection.style.display = 'none'; 
+            gameContent.style.display = 'block'; 
             updateThoughtBubble("Clique em mim para uma nova dúvida!");
         }
 
         function triggerRandomScenario() {
             if (currentScenario >= scenarios.length) {
                 showMessage("Parabéns! Você respondeu a todas as dúvidas!");
-                showFinalResults(); // Mostra os resultados se já acabou
+                showFinalResults(); 
                 return;
             }
-            
             playSound('click'); 
             playVisualEffect('click'); 
-            showScenarioModal(); // Abre o modal com a pergunta
+            showScenarioModal(); 
         }
 
         function showScenarioModal() {
             const scenario = scenarios[currentScenario];
-            
             modalScenarioText.textContent = scenario.text;
-            modalOptionsContainer.innerHTML = ''; // Limpa opções anteriores
-            
-            // Cria os botões de opção dinamicamente
+            modalOptionsContainer.innerHTML = ''; 
             scenario.options.forEach((option, index) => {
                 const button = document.createElement('button');
-                // Adiciona estilos inline (poderiam estar no CSS)
-                button.style.cssText = `
-                    display: block; width: 100%; margin: 10px 0; padding: 15px; 
-                    background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 10px; 
-                    cursor: pointer; text-align: left; font-size: 1.1em; 
-                    transition: all 0.3s ease;
-                `;
+                button.style.cssText = `display: block; width: 100%; margin: 10px 0; padding: 15px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 10px; cursor: pointer; text-align: left; font-size: 1.1em; transition: all 0.3s ease;`;
                 button.textContent = option.text;
                 button.onclick = () => selectModalOption(index);
-                // Efeito hover simples
                 button.onmouseover = () => { button.style.background='#e3f2fd'; button.style.borderColor='#4a90e2'; };
                 button.onmouseout = () => { button.style.background='#f8f9fa'; button.style.borderColor='#e9ecef'; };
-                
                 modalOptionsContainer.appendChild(button);
             });
-            
-            modal.style.display = 'flex'; // Mostra o modal
+            modal.style.display = 'flex'; 
         }
 
         function selectModalOption(selectedIndex) {
             const scenario = scenarios[currentScenario];
             const option = scenario.options[selectedIndex];
-            
-            // Aplica os efeitos da opção escolhida ao estado do jogo
-            Object.keys(option.effects).forEach(stat => {
-                // Limita os stats entre 0 e 100 (exceto conhecimento, talvez?)
-                gameState[stat] = Math.max(0, Math.min(100, gameState[stat] + option.effects[stat]));
-            });
-
-            updateStats(); // Atualiza a sidebar
-            
-            // Feedback imediato e efeitos
+            Object.keys(option.effects).forEach(stat => { gameState[stat] = Math.max(0, Math.min(100, gameState[stat] + option.effects[stat])); });
+            updateStats(); 
             if (option.correct) {
                 changeCharacterExpression('HAPPY');
-                showMessage("🎉 " + option.feedback); // Mostra o feedback positivo
+                showMessage("🎉 " + option.feedback); 
                 playSound('success'); 
                 playVisualEffect('success'); 
-                showSparkleAnimation(); // Mostra o brilho ✨
-                
-                // Verifica se ganhou medalhas
+                showSparkleAnimation(); 
                 checkMedals(); 
             } else {
                 changeCharacterExpression('SAD');
-                showMessage("🤔 " + option.feedback); // Mostra o feedback construtivo
+                showMessage("🤔 " + option.feedback); 
                 playSound('fail'); 
                 playVisualEffect('fail'); 
             }
-            
-            currentScenario++; // Avança para o próximo cenário
-            updateProgress(); // Atualiza a barra de progresso
-            updateThoughtBubble(getRandomThought()); // Muda o pensamento do personagem
-            
-            modal.style.display = 'none'; // Esconde o modal
-            
-            // Verifica se o jogo terminou
-            if (currentScenario >= scenarios.length) {
-                setTimeout(showFinalResults, 2000); // Mostra resultados após um delay
-            }
+            currentScenario++; 
+            updateProgress(); 
+            updateThoughtBubble(getRandomThought()); 
+            modal.style.display = 'none'; 
+            if (currentScenario >= scenarios.length) { setTimeout(showFinalResults, 2000); }
         }
 
         // --- FUNÇÕES DE ATUALIZAÇÃO DA INTERFACE ---
-        function setCharacterImage(imageName) {
-             boyCharacter.src = imageName; 
-        }
+        // (Funções setCharacterImage, changeCharacterExpression, showSparkleAnimation, updateThoughtBubble, getRandomThought, updateStats, updateProgress - como na resposta anterior)
+        function setCharacterImage(imageName) { boyCharacter.src = imageName; }
 
         function changeCharacterExpression(expression) {
-            let imageName;
-            let gradient; // Fundo do círculo da imagem
-            
+            let imageName, gradient; 
             switch(expression) {
-                case 'HAPPY':
-                    imageName = imageMap.HAPPY;
-                    gradient = 'linear-gradient(135deg, #4CAF50, #45a049)';
-                    break;
-                case 'SAD':
-                    imageName = imageMap.SAD;
-                    gradient = 'linear-gradient(135deg, #f44336, #d32f2f)';
-                    break;
-                default: // NEUTRAL
-                    imageName = imageMap.NEUTRAL;
-                    gradient = 'linear-gradient(135deg, #4a90e2, #357abd)';
+                case 'HAPPY': imageName = imageMap.HAPPY; gradient = 'linear-gradient(135deg, #4CAF50, #45a049)'; break;
+                case 'SAD': imageName = imageMap.SAD; gradient = 'linear-gradient(135deg, #f44336, #d32f2f)'; break;
+                default: imageName = imageMap.NEUTRAL; gradient = 'linear-gradient(135deg, #4a90e2, #357abd)';
             }
             setCharacterImage(imageName);
-            boyCharacter.style.background = gradient; // Atualiza o fundo
-            
-            // Temporizador para voltar ao neutro
-            setTimeout(() => {
-                setCharacterImage(imageMap.NEUTRAL);
-                boyCharacter.style.background = 'linear-gradient(135deg, #4a90e2, #357abd)';
-            }, 3000); // Volta ao normal após 3 segundos
+            boyCharacter.style.background = gradient; 
+            setTimeout(() => { setCharacterImage(imageMap.NEUTRAL); boyCharacter.style.background = 'linear-gradient(135deg, #4a90e2, #357abd)'; }, 3000);
         }
         
-        // Função para mostrar a animação ✨
         function showSparkleAnimation() {
             sparkleEffect.style.display = 'block';
-            sparkleEffect.style.animation = 'sparkleAnimation 1s ease'; // Reinicia a animação
-            
-            // Esconde após a animação terminar
-            setTimeout(() => {
-                sparkleEffect.style.display = 'none';
-                sparkleEffect.style.animation = 'none'; // Prepara para a próxima vez
-            }, 1000);
+            sparkleEffect.style.animation = 'sparkleAnimation 1s ease'; 
+            setTimeout(() => { sparkleEffect.style.display = 'none'; sparkleEffect.style.animation = 'none'; }, 1000);
         }
 
-        function updateThoughtBubble(text) {
-            thoughtBubble.textContent = text;
-        }
+        function updateThoughtBubble(text) { thoughtBubble.textContent = text; }
 
         function getRandomThought() {
-            const thoughts = [
-                "Que interessante!", "Aprendi algo novo!", "A puberdade tem destas coisas...",
-                "Próxima dúvida!", "Vamos continuar!", "Conhecimento é poder!"
-            ];
+            const thoughts = ["Que interessante!", "Aprendi algo novo!", "A puberdade tem destas coisas...", "Próxima dúvida!", "Vamos continuar!", "Conhecimento é poder!"];
             return thoughts[Math.floor(Math.random() * thoughts.length)];
         }
 
@@ -578,129 +1256,78 @@
         }
 
         // --- FUNÇÕES DE MEDALHAS E FIM DE JOGO ---
-         function checkMedals() {
-            // Lógica simples: uma medalha a cada X pontos ou por marco
-            if (gameState.knowledge >= 80 && gameState.medals === 0) {
-                 setTimeout(() => awardMedal("Sábio Iniciante! 🥉"), 500); // Pequeno delay
-            } else if (gameState.confidence >= 80 && gameState.medals === 1) {
-                 setTimeout(() => awardMedal("Confiança em Alta! 🥈"), 500);
-            } else if (gameState.hygiene >= 85 && gameState.medals === 2) {
-                 setTimeout(() => awardMedal("Mestre da Limpeza! 🥇"), 500);
-            }
-            // Adicionar mais condições para mais medalhas se quiser
+        // (Funções checkMedals, awardMedal, closeMedalNotification, showFinalResults, restartGame - como na resposta anterior)
+        function checkMedals() {
+            if (gameState.knowledge >= 80 && gameState.medals === 0) { setTimeout(() => awardMedal("Sábio Iniciante! 🥉"), 500); } 
+            else if (gameState.confidence >= 80 && gameState.medals === 1) { setTimeout(() => awardMedal("Confiança em Alta! 🥈"), 500); } 
+            else if (gameState.hygiene >= 85 && gameState.medals === 2) { setTimeout(() => awardMedal("Mestre da Limpeza! 🥇"), 500); }
         }
 
         function awardMedal(medalText) {
-            if (medalNotificationDiv.style.display === 'block') return; // Evita múltiplas notificações
-
+            if (medalNotificationDiv.style.display === 'block') return; 
             gameState.medals++;
-            updateStats(); // Atualiza o contador na sidebar
-            medalTextSpan.textContent = medalText; // Define o texto da notificação
-            medalNotificationDiv.style.display = 'block'; // Mostra a notificação
+            updateStats(); 
+            medalTextSpan.textContent = medalText; 
+            medalNotificationDiv.style.display = 'block'; 
             playSound('win'); 
             playVisualEffect('win'); 
         }
 
-        function closeMedalNotification() {
-            medalNotificationDiv.style.display = 'none';
-        }
+        function closeMedalNotification() { medalNotificationDiv.style.display = 'none'; }
 
         function showFinalResults() {
             let performance = '';
             const totalScore = gameState.health + gameState.knowledge + gameState.confidence + gameState.hygiene;
-            
-            // Define a mensagem de performance baseada na pontuação total
             if (totalScore >= 320) performance = 'Excelente! Você domina o assunto! 🌟';
             else if (totalScore >= 280) performance = 'Muito bom! Quase um expert! 👏';
             else if (totalScore >= 240) performance = 'Bom trabalho! Continue aprendendo! 💪';
             else performance = 'Você começou a jornada! Continue explorando! 📚';
-
-            // Cria o HTML para mostrar os resultados finais
-            scenarioContainer.innerHTML = `
-                <div class="question-card">
-                    <h2>🎊 Parabéns! Jornada Concluída!</h2>
-                    <div style="text-align: center; padding: 20px;">
-                        <h3>${performance}</h3>
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; text-align: left;">
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;"><strong>💪 Saúde:</strong> ${gameState.health}</div>
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;"><strong>🧠 Conhecimento:</strong> ${gameState.knowledge}</div>
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;"><strong>😊 Confiança:</strong> ${gameState.confidence}</div>
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;"><strong>🚿 Higiene:</strong> ${gameState.hygiene}</div>
-                        </div>
-                        <p style="font-size: 1.2em; margin: 20px 0;"><strong>🏅 Medalhas: ${gameState.medals}</strong></p>
-                        <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: left;">
-                            <h4>🎯 Revisão Rápida:</h4>
-                            <p>• A puberdade é normal e saudável.</p>
-                            <p>• Mudanças físicas e emocionais acontecem.</p>
-                            <p>• Higiene é chave!</p>
-                            <p>• Aceite as transformações.</p>
-                            <p>• Informe-se sempre!</p>
-                        </div>
-                        <button onclick="restartGame()" class="start-game-btn" style="background: linear-gradient(45deg, #4CAF50, #45a049);">🔄 Jogar Novamente</button>
-                    </div>
-                </div>
-            `;
-            
-            updateProgress(); // Garante que a barra chegue a 100%
+            scenarioContainer.innerHTML = `<div class="question-card"><h2>🎊 Parabéns! Jornada Concluída!</h2><div style="text-align: center; padding: 20px;"><h3>${performance}</h3><div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; text-align: left;"><div style="background: #f8f9fa; padding: 15px; border-radius: 10px;"><strong>💪 Saúde:</strong> ${gameState.health}</div><div style="background: #f8f9fa; padding: 15px; border-radius: 10px;"><strong>🧠 Conhecimento:</strong> ${gameState.knowledge}</div><div style="background: #f8f9fa; padding: 15px; border-radius: 10px;"><strong>😊 Confiança:</strong> ${gameState.confidence}</div><div style="background: #f8f9fa; padding: 15px; border-radius: 10px;"><strong>🚿 Higiene:</strong> ${gameState.hygiene}</div></div><p style="font-size: 1.2em; margin: 20px 0;"><strong>🏅 Medalhas: ${gameState.medals}</strong></p><div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: left;"><h4>🎯 Revisão Rápida:</h4><p>• A puberdade é normal e saudável.</p><p>• Mudanças físicas e emocionais acontecem.</p><p>• Higiene é chave!</p><p>• Aceite as transformações.</p><p>• Informe-se sempre!</p></div><button onclick="restartGame()" class="start-game-btn" style="background: linear-gradient(45deg, #4CAF50, #45a049);">🔄 Jogar Novamente</button></div></div>`;
+            updateProgress(); 
             playSound('win'); 
             playVisualEffect('win'); 
         }
 
         function restartGame() {
             currentScenario = 0;
-            gameState = { // Reinicia o estado do jogo
-                health: 70, knowledge: 50, confidence: 60, hygiene: 65, medals: 0
-            };
-            updateStats(); // Atualiza a sidebar
-            progressFillDiv.style.width = '0%'; // Reinicia a barra de progresso
-            scenarioContainer.innerHTML = ''; // Limpa a área de cenários
+            gameState = { health: 70, knowledge: 50, confidence: 60, hygiene: 65, medals: 0 };
+            updateStats(); 
+            progressFillDiv.style.width = '0%'; 
+            scenarioContainer.innerHTML = ''; 
             updateThoughtBubble("Vamos de novo! Clique em mim.");
-            // Não precisa mexer no welcomeSection ou gameContent, eles já estão no estado certo
         }
 
         // --- INICIALIZAÇÃO DO JOGO ---
-
-        // Evento: Clicar no botão "Ver Introdução"
+        // (Lógica dos Event Listeners para startButton, introVideo - como na resposta anterior)
         startButton.addEventListener('click', () => {
-            introContent.style.display = 'none'; // Esconde texto intro
-            startButton.style.display = 'none'; // Esconde botão intro
-            introVideo.style.display = 'block'; // Mostra vídeo
-            
-            introVideo.muted = false; // Tira o mute do vídeo
+            introContent.style.display = 'none'; 
+            startButton.style.display = 'none'; 
+            introVideo.style.display = 'block'; 
+            introVideo.muted = false; 
             introVideo.play().catch(e => {
                 console.error("Video play failed:", e);
-                // Se o vídeo falhar, esconde o splash e inicia o jogo diretamente
                 splashScreen.style.opacity = '0';
                 setTimeout(() => { splashScreen.style.display = 'none'; }, 500);
-                startGame(); // Chama o início do jogo sem o vídeo
+                startGame(); 
             });
-
-            // Ativa os áudios do jogo (mas ainda não toca a música de fundo)
             isMuted = false;
             soundEnabled = true; 
             [bgMusic, sfxClick, sfxSuccess, sfxFail, sfxWin].forEach(a => a.muted = false);
-            muteButton.textContent = '🔊'; // Atualiza o botão de mute
+            muteButton.textContent = '🔊'; 
         });
 
-        // Evento: Vídeo terminou de tocar
         introVideo.addEventListener('ended', () => {
-            // Esconde o ecrã splash com fade out
             splashScreen.style.opacity = '0';
-            setTimeout(() => { splashScreen.style.display = 'none'; }, 500); // Remove após transição
-            
-            playMusic(); // Agora sim, toca a música de fundo
-            startGame(); // Inicia a interface principal do jogo
+            setTimeout(() => { splashScreen.style.display = 'none'; }, 500);
+            playMusic(); 
+            startGame(); 
         });
         
-        // Garante que os controlos do vídeo apareçam quando carregado
-        introVideo.addEventListener('loadeddata', () => {
-            introVideo.controls = true; 
-        });
+        introVideo.addEventListener('loadeddata', () => { introVideo.controls = true; });
         
         // --- CÓDIGO EXECUTADO QUANDO A PÁGINA CARREGA ---
-        muteButton.textContent = isMuted ? '🔇' : '🔊'; // Define estado inicial do botão mute
-        updateStats(); // Mostra os stats iniciais na sidebar
-        // Nota: startGame() só é chamado após o vídeo ou se o vídeo falhar.
+        muteButton.textContent = isMuted ? '🔇' : '🔊'; 
+        updateStats(); 
         
     </script>
 </body>
