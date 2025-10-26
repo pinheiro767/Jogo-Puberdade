@@ -1,336 +1,535 @@
 /* Estilos CSS do Jogo - JogoPuberdade/css/styles.css */
 
-/* --- EFEITOS 3D E BACKGROUND --- */
-body { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    /* Gradient de fundo animado */
-    background: linear-gradient(45deg, #1e3c72, #2a5298, #667eea, #764ba2);
-    background-size: 400% 400%; 
-    animation: gradientShift 8s ease infinite; 
-    height: 100vh; 
-    overflow: hidden; 
-    perspective: 1000px; /* Habilita a perspectiva 3D */
-} 
-html { height: 100%; }
-
-@keyframes gradientShift { 
-    0% { background-position: 0% 50%; } 
-    50% { background-position: 100% 50%; } 
-    100% { background-position: 0% 50%; } 
-} 
-
-.game-container { 
-    display: flex; 
-    height: 100%; 
-    width: 100%; 
-    transform-style: preserve-3d; 
-} 
-
-/* --- SIDEBAR IMERSIVA --- */
-.sidebar { 
-    width: 300px; 
-    background: rgba(255, 255, 255, 0.15); /* Fundo semi-transparente */
-    backdrop-filter: blur(20px); 
-    border: 1px solid rgba(255, 255, 255, 0.2); 
-    padding: 20px; 
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); 
-    overflow-y: auto; 
-    border-radius: 0 25px 25px 0; 
-    transform: translateZ(50px); /* Posição inicial 3D */
-    transition: all 0.5s ease; 
-} 
-.sidebar:hover { 
-    transform: translateZ(80px) rotateY(-5deg); /* Efeito 3D ao passar o mouse */
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3); 
-} 
-
-/* --- PAINÉIS DE STATUS --- */
-.stats { 
-    background: linear-gradient(135deg, rgba(240, 147, 251, 0.9) 0%, rgba(245, 87, 108, 0.9) 100%); 
-    backdrop-filter: blur(15px); 
-    border: 1px solid rgba(255, 255, 255, 0.3); 
-    border-radius: 20px; 
-    padding: 20px; 
-    margin-bottom: 25px; 
-    color: white; 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); 
-    transform: translateZ(20px); 
-    transition: all 0.4s ease; 
-} 
-.stats:hover { 
-    transform: translateZ(40px) rotateX(5deg); 
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3); 
-} 
-.stats h3 { 
-    margin: 0 0 15px 0; 
-    font-size: 18px; 
-    text-align: center; 
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
-} 
-.stat-item { 
-    display: flex; 
-    justify-content: space-between; 
-    margin-bottom: 12px; 
-    font-weight: bold; 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); 
-    transition: all 0.3s ease; 
-} 
-.stat-item:hover { 
-    transform: translateX(5px); 
-    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5); 
-} 
-
-/* --- OPÇÕES DE JOB (GANHAR CONHECIMENTO) --- */
-.job-option { 
-    display: flex; 
-    align-items: center; 
-    background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 255, 255, 0.3); 
-    border-radius: 15px; 
-    padding: 15px; 
-    margin-bottom: 15px; 
-    cursor: pointer; 
-    transition: all 0.4s ease; 
-    transform: translateZ(10px); 
-    color: white; 
-} 
-.job-option:hover { 
-    background: rgba(255, 255, 255, 0.3); 
-    transform: translateZ(30px) rotateY(2deg) scale(1.02); 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
-} 
-.job-icon { 
-    font-size: 28px; 
-    margin-right: 15px; 
-    animation: float 3s ease-in-out infinite; 
-} 
-@keyframes float { 
-    0%, 100% { transform: translateY(0px); } 
-    50% { transform: translateY(-5px); } 
-} 
-.job-info { flex: 1; } 
-.job-name { font-weight: bold; margin-bottom: 8px; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); } 
-.job-reward { font-size: 12px; opacity: 0.9; } 
-
-/* --- BOTÕES DE CONTROLE --- */
-.controls { margin-top: 25px; } 
-.btn { 
-    width: 100%; 
-    padding: 15px; 
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.9) 0%, rgba(0, 242, 254, 0.9) 100%); 
-    backdrop-filter: blur(15px); 
-    border: 1px solid rgba(255, 255, 255, 0.3); 
-    color: #1e3c72; /* Cor de texto mais escura para contraste */
-    border-radius: 15px; 
-    font-size: 16px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    transition: all 0.4s ease; 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); 
-    transform: translateZ(15px); 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); 
-} 
-.btn:hover { 
-    transform: translateZ(35px) rotateX(-5deg) scale(1.05); 
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3); 
-} 
-
-/* --- ÁREA PRINCIPAL E CENÁRIOS REATIVOS --- */
-.main-content { 
-    flex: 1; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    position: relative; 
-    padding: 20px; 
-    perspective: 1500px; 
-    transition: background 1.5s ease-in-out; /* Transição de fundo para os cenários */
+/* --- ESTILOS GERAIS E LAYOUT BASE --- */
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fundo gradiente inicial */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    min-height: 100vh; /* Usa min-height para garantir que o body ocupe a tela toda */
+    color: #333;
+    overflow-x: hidden; /* Evita scroll horizontal */
+    -webkit-text-size-adjust: 100%; /* Previne zoom de texto em mobile */
+    -webkit-tap-highlight-color: transparent; /* Remove highlight azul em mobile */
 }
 
-/* Classes de Cenário */
-.scenario-1 { 
-    background: linear-gradient(135deg, #f0f0f0 0%, #d8d8d8 100%) !important; /* Estágio 1: Neutro */
-}
-.scenario-2 { 
-    background: linear-gradient(45deg, #f0e6ff 0%, #e0c3fc 100%) !important; /* Estágio 2: Foco no Estudo */
-}
-.scenario-3 { 
-    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%) !important; /* Estágio 3: Clareza Máxima */
+html {
+    height: 100%; /* Garante que o html também ocupe 100% da altura */
 }
 
-
-/* --- PERSONAGEM CENTRAL (MANTIDO) --- */
-#character-container { 
-    text-align: center; 
-    position: relative; 
-    transform-style:preserve-3d; 
-} 
-
-#boy-character { 
-    width: 300px; /* Tamanho da imagem */
-    height: auto; 
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5)); 
-    cursor: pointer; 
-    transition: all 0.6s ease; 
-    transform: translateZ(100px); /* Posição inicial 3D */
-    /* Adicione um fundo de círculo transparente para o hover */
-    padding: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-} 
-#boy-character:hover { 
-    transform: translateZ(150px) scale(1.1); /* Efeito 3D ao passar o mouse */
-    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.5);
-} 
-
-#thought-bubble { 
-    position: absolute; 
-    top: -80px; 
-    left: 50%; 
-    transform: translateX(-50%) translateZ(50px); 
-    background: rgba(255, 255, 255, 0.95); 
-    backdrop-filter: blur(15px); 
-    border: 1px solid rgba(255, 255, 255, 0.3); 
-    padding: 20px 25px; 
-    border-radius: 25px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5); 
-    font-weight: bold; 
-    color: #333; 
-    max-width: 280px; 
-    text-align: center; 
-    animation: bubbleFloat 3s ease-in-out infinite; 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
-} 
-/* Animação da bolha de pensamento */
-@keyframes bubbleFloat { 
-    0%, 100% { transform: translateX(-50%) translateZ(50px) rotateX(0deg) translateY(0px); } 
-    33% { transform: translateX(-50%) translateZ(70px) rotateX(5deg) translateY(-8px); } 
-    66% { transform: translateX(-50%) translateZ(50px) rotateX(-3deg) translateY(-12px); } 
-} 
-/* O balão de cauda foi removido para simplicidade em CSS, mantendo o visual limpo */
-
-/* Animações de Reação do Garoto (MANTIDAS) */
-.boy-happy { animation: boy-bounce 0.6s ease-out; }
-@keyframes boy-bounce { 
-    0% { transform: scale(1); } 
-    50% { transform: translateY(-20px) scale(1.15); } 
-    100% { transform: scale(1.1); } 
-} 
-.boy-sad { animation: boy-shake 0.3s ease-in-out 2; transform: scale(0.9); }
-@keyframes boy-shake { 
-    0%, 100% { transform: translateX(0) scale(1); } 
-    25% { transform: translateX(-5px) scale(0.95); } 
-    75% { transform: translateX(5px) scale(0.95); } 
+.game-container {
+    display: flex;
+    min-height: 100vh; /* Garante altura mínima */
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 0 auto; /* Centraliza o container */
+    background: rgba(255, 255, 255, 0.95); /* Fundo branco semi-transparente */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
-/* --- MENSAGENS E PARTICULAS (EFEITOS IMERSIVOS) --- */
-.message { 
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 300px;
+    background: linear-gradient(180deg, #4a90e2 0%, #357abd 100%); /* Gradiente azul */
+    color: white; /* Texto branco */
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Sombra lateral */
+    display: flex; /* Permite organizar os stats verticalmente */
+    flex-direction: column; /* Organiza os filhos em coluna */
+}
+
+.stats {
+    background: rgba(255, 255, 255, 0.1); /* Fundo levemente transparente */
+    border-radius: 15px; /* Cantos arredondados */
+    padding: 20px;
+    margin-bottom: 20px; /* Espaço entre os blocos de stats */
+}
+
+.stats h3 {
+    margin: 0 0 15px 0; /* Espaço abaixo do título */
+    font-size: 1.2em;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linha divisória */
+    padding-bottom: 10px; /* Espaço abaixo da linha */
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between; /* Alinha texto à esquerda e valor à direita */
+    align-items: center;
+    margin: 10px 0; /* Espaço vertical entre itens */
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1); /* Fundo sutil para cada item */
+    border-radius: 8px;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+.main-content {
+    flex: 1; /* Ocupa o espaço restante */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza conteúdo horizontalmente */
+    justify-content: center; /* Centraliza conteúdo verticalmente */
+    text-align: center;
+    position: relative; /* Necessário para posicionar elementos absolutos dentro */
+}
+
+/* Secção de Boas-vindas Inicial */
+.welcome-section {
+    max-width: 600px; /* Limita largura do texto */
+}
+
+.welcome-section h1 {
+    color: #4a90e2; /* Cor azul */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.welcome-section p {
+    font-size: 1.2em;
+    line-height: 1.6; /* Espaçamento entre linhas */
+    margin-bottom: 30px;
+    color: #666; /* Cinza escuro */
+}
+
+/* Botão "Começar Aventura" (caso o vídeo falhe) */
+.start-game-btn {
+    background: linear-gradient(45deg, #4CAF50, #45a049); /* Gradiente verde */
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.3em;
+    border-radius: 25px; /* Botão arredondado */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3); /* Sombra verde */
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+.start-game-btn:hover {
+    transform: translateY(-2px); /* Efeito de levantar ao passar o mouse */
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4); /* Sombra mais intensa */
+}
+
+/* Container do Jogo Principal (inicialmente escondido) */
+.game-content {
+    display: none; /* Começa escondido */
+    width: 100%;
+    max-width: 800px; /* Largura máxima da área de jogo */
+}
+
+/* --- ELEMENTOS DO JOGO --- */
+
+/* Barra de Progresso */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #e9ecef; /* Cinza claro */
+    border-radius: 5px;
+    margin: 20px 0; /* Espaço vertical */
+    overflow: hidden; /* Esconde o que sair da barra */
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #45a049); /* Gradiente verde */
+    width: 0%; /* Começa vazia */
+    transition: width 0.5s ease; /* Animação de preenchimento */
+    border-radius: 5px; /* Mantém cantos arredondados */
+}
+
+/* Personagem e Balão de Pensamento */
+#character-container {
+    text-align: center;
+    margin: 30px 0;
+    position: relative; /* Para posicionar o balão */
+}
+
+#boy-character {
+    width: 120px; /* Tamanho da imagem */
+    height: 120px;
+    /* Fundo inicial (será mudado pelo JS) */
+    background: linear-gradient(135deg, #4a90e2, #357abd); 
+    border-radius: 50%; /* Faz a imagem (e o fundo) ficarem redondos */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transição suave */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Sombra inicial */
+    object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer */
+    display: inline-block; /* Para centralizar corretamente com margin: auto */
+    vertical-align: middle; /* Alinha melhor se houver texto ao lado */
+}
+
+#boy-character:hover {
+    transform: scale(1.1); /* Aumenta um pouco */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* Sombra mais forte */
+}
+
+#thought-bubble {
+     position: absolute; 
+     /* Posiciona acima do personagem */
+     bottom: 105%; /* Ligeiramente acima da imagem */
+     left: 50%; 
+     transform: translateX(-50%); /* Centraliza horizontalmente */
+     
+     background: white; 
+     padding: 10px 15px; 
+     border-radius: 20px; /* Balão arredondado */
+     box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+     font-size: 0.9em; 
+     white-space: nowrap; /* Evita quebra de linha */
+     opacity: 0.9; /* Leve transparência */
+     z-index: 10; /* Garante que fique acima */
+     transition: opacity 0.3s ease; /* Transição suave para aparecer/desaparecer */
+}
+
+/* "Flecha" do balão de pensamento */
+#thought-bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%; /* Posiciona abaixo do balão */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    /* Cria um triângulo apontando para baixo */
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white; /* Usa a cor de fundo do balão */
+}
+
+/* Card da Pergunta (dentro do Modal) */
+.question-card { /* Este estilo é aplicado ao conteúdo final, não ao modal */
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #4a90e2; /* Barra azul à esquerda */
+    text-align: left; /* Alinha o texto da pergunta e opções à esquerda */
+}
+
+.question-card h2 { /* Título "Cenário X de Y" */
+    color: #4a90e2;
+    margin-bottom: 20px;
+    text-align: center; /* Centraliza apenas o título do card */
+}
+
+/* Botões de Opção dentro do Modal (estilizados pelo JS, mas com classes base) */
+.options {
+    display: grid; /* Organiza botões verticalmente */
+    gap: 15px; /* Espaço entre botões */
+    margin: 20px 0;
+}
+
+/* --- MODAL DE PERGUNTAS --- */
+#question-modal { 
     position: fixed; 
-    top: 20px; 
-    right: 20px; 
-    background: linear-gradient(135deg, rgba(67, 233, 123, 0.95) 0%, rgba(56, 249, 215, 0.95) 100%); 
-    backdrop-filter: blur(15px); 
-    border: 1px solid rgba(255, 255, 255, 0.3); 
-    color: #1e3c72; /* Cor de texto mais escura para contraste */
-    padding: 18px 25px; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.7); /* Fundo escuro semi-transparente */
+    backdrop-filter: blur(5px); /* Efeito de desfoque (opcional) */
+    display: none; /* Começa escondido */
+    z-index: 10000; /* Fica acima de tudo */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+}
+
+#modal-content {
+    background: white; 
+    padding: 30px; 
     border-radius: 15px; 
-    font-weight: bold; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); 
-    transform: translateX(400px) translateZ(0px); 
-    transition: all 0.5s ease; 
-    z-index: 1000; 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); 
-} 
-.message.show { 
-    transform: translateX(0) translateZ(50px); 
-    animation: messageFloat 2s ease-in-out infinite; 
-} 
-@keyframes messageFloat { 
-    0%, 100% { transform: translateX(0) translateZ(50px) rotateY(0deg); } 
-    50% { transform: translateX(0) translateZ(70px) rotateY(2deg); } 
-} 
+    max-width: 600px; /* Largura máxima */
+    width: 90%; /* Responsivo em telas menores */
+    max-height: 80%; /* Altura máxima */
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito grande */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Sombra */
+}
 
-/* Partículas Flutuantes (Para o efeito imersivo) */
-.floating-particles { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    pointer-events: none; 
-    overflow: hidden; 
-} 
-.particle { 
-    position: absolute; 
-    font-size: 20px; 
-    opacity: 0.7; 
-    animation: floatParticle 8s ease-in-out infinite; 
-    transform-style: preserve-3d; 
-} 
-.particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 6s; } 
-.particle:nth-child(2) { left: 20%; animation-delay: 1s; animation-duration: 8s; } 
-.particle:nth-child(3) { left: 30%; animation-delay: 2s; animation-duration: 7s; } 
-.particle:nth-child(4) { left: 50%; animation-delay: 3s; animation-duration: 9s; } 
-.particle:nth-child(5) { left: 60%; animation-delay: 1.5s; animation-duration: 6.5s; } 
-.particle:nth-child(6) { left: 70%; animation-delay: 4s; animation-duration: 8.5s; } 
-.particle:nth-child(7) { left: 80%; animation-delay: 2.5s; animation-duration: 7.5s; } 
-.particle:nth-child(8) { left: 90%; animation-delay: 5s; animation-duration: 6.8s; } 
-@keyframes floatParticle { 
-    0% { transform: translateY(100vh) translateZ(0px) rotateY(0deg) rotateZ(0deg); opacity: 0; } 
-    10% { opacity: 0.7; } 
-    50% { transform: translateY(50vh) translateZ(100px) rotateY(180deg) rotateZ(180deg); opacity: 1; } 
-    90% { opacity: 0.7; } 
-    100% { transform: translateY(-10vh) translateZ(200px) rotateY(360deg) rotateZ(360deg); opacity: 0; } 
-} 
+#modal-scenario-text { /* Texto da pergunta no modal */
+    color: #4a90e2; 
+    margin-bottom: 20px; 
+    font-size: 1.3em; /* Tamanho maior para a pergunta */
+    text-align: center;
+}
 
-/* --- MODAL (MANTIDO E MELHORADO) --- */
-#question-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 2000; perspective: 1000px; } 
-#modal-content { 
-    background: rgba(255, 255, 255, 0.95); 
-    backdrop-filter: blur(25px); 
-    border: 2px solid rgba(255, 255, 255, 0.3); 
-    padding: 40px; 
-    border-radius: 30px; 
-    max-width: 650px; 
-    width: 90%; 
-    text-align: center; 
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.3); 
-    transform: translateZ(100px) rotateX(5deg); 
-    transition: all 0.5s ease; 
-    animation: modalEntrance 0.6s ease; 
-} 
-@keyframes modalEntrance { 
-    0% { transform: translateZ(0px) rotateX(90deg) scale(0.5); opacity: 0; } 
-    100% { transform: translateZ(100px) rotateX(5deg) scale(1); opacity: 1; } 
-} 
-#modal-content h3 { 
-    color: #333; 
-    margin-bottom: 30px; 
-    font-size: 22px; 
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    line-height: 1.4; 
-} 
-.modal-option { 
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%); 
-    backdrop-filter: blur(15px); 
-    border: 1px solid rgba(255, 255, 255, 0.3); 
+/* Container das opções dentro do modal */
+#modal-options-container {
+    display: flex;
+    flex-direction: column; /* Botões um abaixo do outro */
+    gap: 10px; /* Espaço entre botões */
+}
+
+/* --- FEEDBACK VISUAL E NOTIFICAÇÕES --- */
+
+/* Notificação de Medalha (pop-up) */
+.medal-notification {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(45deg, #FFD700, #FFA500); /* Gradiente dourado */
+    color: #333; /* Texto escuro */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Acima do jogo, abaixo do modal */
+    display: none; /* Começa escondido */
+    text-align: center;
+    animation: medalPop 0.5s ease; /* Animação de entrada */
+}
+@keyframes medalPop {
+    from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Mensagem de feedback (canto inferior) */
+.message {
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    background: rgba(74, 144, 226, 0.9); /* Azul semi-transparente */
     color: white; 
-    padding: 18px 25px; 
-    margin: 15px 0; 
-    border-radius: 15px; 
-    cursor: pointer; 
-    transition: all 0.4s ease; 
-    font-weight: bold; 
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); 
-    transform: translateZ(20px); 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2); 
-} 
-.modal-option:hover { 
-    transform: translateZ(40px) rotateX(-5deg) scale(1.05); 
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3); 
-    background: linear-gradient(135deg, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 1) 100%); 
+    padding: 15px 25px; 
+    border-radius: 25px; /* Cantos bem arredondados */
+    display: none; /* Começa escondido */
+    z-index: 1000; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    /* Adicionar animações de entrada/saída se desejar */
+}
+
+/* Container da animação de brilho ✨ */
+#success-animation-container {
+    position: fixed; 
+    top: 50%; left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 9999; /* Acima de quase tudo */
+    pointer-events: none; /* Não interfere com cliques */
+}
+#sparkle-effect {
+    /* Estilos base, animação é controlada pelo JS */
+    width: 100px; height: 100px; 
+    display: none; /* Começa escondido */
+    font-size: 4em; /* Tamanho do emoji */
+    /* A animação 'sparkleAnimation' é aplicada via JS */
+}
+
+
+/* --- BOTÃO DE SOM/MUTE --- */
+#mute-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(74, 144, 226, 0.9); /* Azul */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%; /* Botão redondo */
+    cursor: pointer;
+    font-size: 1.2em; /* Tamanho do ícone */
+    z-index: 1000; /* Acima do jogo */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+#mute-button:hover {
+    transform: scale(1.1); /* Aumenta um pouco */
+    background: rgba(74, 144, 226, 1); /* Cor sólida no hover */
+}
+
+/* --- ANIMAÇÕES GERAIS --- */
+
+/* Usada nos botões de opção corretos */
+@keyframes correctPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); } /* Pulso sutil */
+    100% { transform: scale(1); }
+}
+
+/* Usada nos botões de opção incorretos */
+@keyframes incorrectShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); } /* Tremor leve */
+    75% { transform: translateX(4px); }
+}
+
+/* Usada na notificação de slide-in (canto superior direito) */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+/* Usada na notificação de slide-out */
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+/* --- EFEITOS VISUAIS AVANÇADOS (Opcional, mas mantidos) --- */
+
+/* Efeito de Brilho na Tela (Sucesso) */
+.success-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 9998;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+    animation: successGlow 2s ease-out forwards; /* 'forwards' mantém o estado final */
+}
+@keyframes successGlow {
+    0% { opacity: 0; transform: scale(0.8); }
+    30% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1); } /* Termina transparente */
+}
+
+/* Partículas de Brilho Flutuantes (Sucesso) */
+.sparkle {
+    position: absolute; color: #FFD700; font-size: 2em;
+    animation: sparkleFloat 2s ease-out forwards;
+    pointer-events: none; z-index: 9999;
+}
+@keyframes sparkleFloat {
+    0% { opacity: 0; transform: scale(0) rotate(0deg); }
+    20% { opacity: 1; transform: scale(1.2) rotate(90deg); }
+    100% { opacity: 0; transform: scale(0.5) rotate(360deg) translateY(-100px); }
+}
+.diamond { /* Partícula alternativa */
+    position: absolute; color: #00BFFF; font-size: 1.5em;
+    animation: diamondSpin 2.5s ease-out forwards;
+    pointer-events: none; z-index: 9999;
+}
+@keyframes diamondSpin {
+    0% { opacity: 0; transform: scale(0) rotate(0deg); }
+    30% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0.3) rotate(720deg) translateY(-150px); }
+}
+
+/* Efeito de Tela Rachada (Erro) */
+.crack-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 9998;
+    background: 
+        linear-gradient(45deg, transparent 40%, rgba(255,0,0,0.05) 41%, rgba(255,0,0,0.05) 43%, transparent 44%),
+        linear-gradient(-45deg, transparent 40%, rgba(255,0,0,0.05) 41%, rgba(255,0,0,0.05) 43%, transparent 44%),
+        linear-gradient(90deg, transparent 48%, rgba(255,0,0,0.05) 49%, rgba(255,0,0,0.05) 51%, transparent 52%);
+    animation: crackAppear 1.5s ease-out forwards; /* 'forwards' mantém estado final */
+}
+@keyframes crackAppear {
+    0% { opacity: 0; transform: scale(1); filter: blur(0px); }
+    30% { opacity: 0.8; transform: scale(1.01); filter: blur(0.5px); } /* Mais sutil */
+    60% { opacity: 0.6; transform: scale(0.99); filter: blur(0px); }
+    100% { opacity: 0; transform: scale(1); filter: blur(0px); } /* Termina transparente */
+}
+.crack-line { /* Linhas individuais da rachadura */
+    position: absolute; background: rgba(255, 0, 0, 0.2); /* Mais sutil */
+    animation: crackGrow 1s ease-out forwards;
+    z-index: 9999;
+}
+@keyframes crackGrow {
+    0% { width: 0; height: 1px; opacity: 0; } /* Mais fina */
+    50% { opacity: 0.7; }
+    100% { opacity: 0; } /* Desaparece */
+}
+
+/* Efeito de Tremor na Tela (Erro) */
+.shake-screen {
+    animation: screenShake 0.6s ease-in-out; /* Mais rápido */
+}
+@keyframes screenShake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-3px) rotate(-0.3deg); } /* Mais sutil */
+    /* ... (restante da animação pode ser ajustada para ser mais sutil) ... */
+     20% { transform: translateX(3px) rotate(0.3deg); }
+     30% { transform: translateX(-2px) rotate(-0.2deg); }
+     40% { transform: translateX(2px) rotate(0.2deg); }
+     50% { transform: translateX(-1px) rotate(-0.1deg); }
+     60% { transform: translateX(1px) rotate(0.1deg); }
+     70% { transform: translateX(-0.5px); }
+     80% { transform: translateX(0.5px); }
+     90% { transform: translateX(0); }
+}
+
+/* Brilho Pulsante Verde (Sucesso - aplicado ao .game-container) */
+.success-glow {
+    animation: successPulse 1.5s ease-out;
+}
+@keyframes successPulse {
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.5); }
+    70% { box-shadow: 0 0 0 20px rgba(76, 175, 80, 0); } /* Termina antes */
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+}
+
+/* Flash Vermelho (Erro - aplicado ao .game-container) */
+.error-flash {
+    animation: errorFlash 0.8s ease-out; /* Mais rápido */
+}
+@keyframes errorFlash {
+    0%, 100% { background-color: rgba(255, 255, 255, 0.95); } /* Volta ao fundo normal */
+    25%, 75% { background-color: rgba(244, 67, 54, 0.15); } /* Flash vermelho sutil */
+    50% { background-color: rgba(244, 67, 54, 0.25); }
+}
+
+/* Animação do brilho ✨ */
+@keyframes sparkleAnimation {
+    0% { transform: scale(0.5) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+    100% { transform: scale(1) rotate(360deg); opacity: 0; }
+}
+
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column; /* Empilha sidebar e main content */
+    }
+    
+    .sidebar {
+        width: 100%; /* Ocupa largura total */
+        padding: 15px;
+        order: 2; /* Sidebar aparece depois do conteúdo principal */
+        border-radius: 0; /* Remove cantos arredondados */
+        max-height: 40vh; /* Limita altura em telas pequenas */
+        overflow-y: auto; /* Adiciona scroll se necessário */
+    }
+    
+    .main-content {
+        padding: 15px;
+        order: 1; /* Conteúdo principal aparece primeiro */
+        min-height: 60vh; /* Garante altura mínima */
+    }
+    
+    .welcome-section h1, #modal-scenario-text {
+        font-size: 1.8em; /* Reduz tamanho das fontes */
+    }
+    .welcome-section p { font-size: 1em; }
+    
+    #boy-character { width: 100px; height: 100px; } /* Reduz personagem */
+    #thought-bubble { font-size: 0.8em; padding: 8px 12px; top: -50px; }
+    
+    #mute-button { /* Ajusta posição do botão mute */
+        top: 10px; right: 10px; padding: 8px 12px; font-size: 1em;
+    }
+    #modal-content { padding: 20px; } /* Reduz padding do modal */
+}
+
+@media (max-width: 480px) {
+    .main-content { padding: 10px; }
+    .welcome-section h1, #modal-scenario-text { font-size: 1.5em; } /* Reduz mais as fontes */
+    .question-card, #modal-content { padding: 15px; }
+    
+    #boy-character { width: 80px; height: 80px; } /* Reduz mais o personagem */
+    .start-game-btn { padding: 12px 30px; font-size: 1.1em; }
+    
+    .stats h3 { font-size: 1.1em; } /* Reduz títulos da sidebar */
+    .stat-item { font-size: 0.9em; padding: 6px; }
+}
+
+/* --- ESTILOS PARA INTERAÇÃO TOUCH --- */
+.start-game-btn, #boy-character, #mute-button, .modal-option /* Adiciona modal-option */ {
+    -webkit-tap-highlight-color: rgba(74, 144, 226, 0.3); /* Feedback visual ao tocar */
+    touch-action: manipulation; /* Otimiza resposta ao toque */
+}
+
+/* Correções específicas para iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    .game-container, body, html {
+         min-height: -webkit-fill-available; /* Garante altura total em iOS */
+    }
 }
